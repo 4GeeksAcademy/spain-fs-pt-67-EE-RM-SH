@@ -13,9 +13,11 @@ export const Home = () => {
     <div className="container-fluid text-center mt-5 d-flex justify-content-center">
 
       {/* <video className="background-video" autoPlay loop muted>
-        <source src={bgVideo} type="video/mp4" />
+        <source src="https://www.youtube.com/watch?v=KCVN-SuBBWM" />
         Tu navegador no soporta el elemento de video.
       </video> */}
+
+
 <img src={bgVideo} className="background-home" />
 
       <div className="card mx-5">
