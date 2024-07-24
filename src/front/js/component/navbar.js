@@ -16,33 +16,33 @@ export const Navbar = () => {
 					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 						<li className="nav-item dropdown">
 							<a className="nav-link text-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Cursos <i class="fa-solid fa-school"></i>
+								Cursos <i className="fa-solid fa-school"></i>
 							</a>
 							<ul className="dropdown-menu">
-								<li><a className="dropdown-item text-success" href="#">HTML5   <i class="fa-brands fa-html5"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">CSS3   <i class="fa-brands fa-css3-alt"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">JAVASCRIPT   <i class="fa-brands fa-js"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">SQL   <i class="fa-solid fa-database"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">PYTHON   <i class="fa-brands fa-python"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">REACT   <i class="fa-solid fa-atom"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">HTML5   <i className="fa-brands fa-html5"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">CSS3   <i className="fa-brands fa-css3-alt"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">JAVASCRIPT   <i className="fa-brands fa-js"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">SQL   <i className="fa-solid fa-database"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">PYTHON   <i className="fa-brands fa-python"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">REACT   <i className="fa-solid fa-atom"></i></a></li>
 							</ul>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link text-success" href="#">Blog <i class="fa-solid fa-blog"></i></a>
+							<a className="nav-link text-success" href="#">Blog <i className="fa-solid fa-blog"></i></a>
 						</li>
 						<li className="nav-item dropdown">
 							<a className="nav-link text-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Login <i class="fa-solid fa-right-to-bracket"></i>
+								Login <i className="fa-solid fa-right-to-bracket"></i>
 							</a>
 							<ul className="dropdown-menu">
-								<input className="form-control me-2" type="Login" placeholder="Login"/> <i class="fa-solid fa-circle-user"/>
-								<li><a className="dropdown-item" href="#">Password  <i class="fa-solid fa-lock"></i></a></li>
+								<input className="form-control me-2" type="Login" placeholder="Login"/> <i className="fa-solid fa-circle-user"/>
+								<li><a className="dropdown-item" href="#">Password  <i className="fa-solid fa-lock"></i></a></li>
 								<li><hr className="dropdown-divider" /></li>
-								<li><a className="dropdown-item" href="#">Log Out <i class="fa-solid fa-share-from-square"></i></a></li>
+								<li><a className="dropdown-item" href="#">Log Out <i className="fa-solid fa-share-from-square"></i></a></li>
 							</ul>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link text-success disabled" aria-disabled="true">Carrito<i class="fa-solid fa-cart-shopping"></i></a>
+							<a className="nav-link text-success disabled" aria-disabled="true">Carrito<i className="fa-solid fa-cart-shopping"></i></a>
 						</li>
 					</ul>
 					<form className="d-flex ms-3" role="search">
