@@ -1,7 +1,58 @@
-/*
-    home.css: This website contains selectors only used in home.css
+body, html {
+ background-color: black;
+ color: white;
+ height: 100vh;
+ width: 100%;
+ z-index: -2;
+ position: relative;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.card{
+  position: relative;
+  width: 20rem;
+  background: rgb(10, 10, 10);
+  border-color: rgb(3, 53, 22);
+  z-index: 2;
+}
+
+.card-img-top{
+  width: 300px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.card-title{
+  font-size: 20px;
+}
+
+.card-cost1{
+  padding: 0;
+  margin-top: none;
+  font-size: 16px;
+  text-decoration: line-through;
+  color: red;
+}
+
+.card-cost2{
+  padding: 0;
+  margin-top: none;
+  font-size: 25px;
+  color: white;
+}
+
+img{
+  margin-top: 12px;
+}
+
+.background-home{
+  margin: 0;
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.container-fluid{
+  z-index: -2;
+}
