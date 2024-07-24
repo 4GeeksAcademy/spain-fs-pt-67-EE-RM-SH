@@ -19,12 +19,12 @@ export const Navbar = () => {
 								Cursos <i class="fa-solid fa-school"></i>
 							</a>
 							<ul className="dropdown-menu">
-								<li><a className="dropdown-item text-success" href="#">HTML5   <i class="fa-brands fa-html5"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">CSS3   <i class="fa-brands fa-css3-alt"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">JAVASCRIPT   <i class="fa-brands fa-js"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">SQL   <i class="fa-solid fa-database"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">PYTHON   <i class="fa-brands fa-python"></i></a></li>
-								<li><a className="dropdown-item text-success" href="#">REACT   <i class="fa-solid fa-atom"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">HTML5   <i class="fa-brands fa-html5 fa-beat"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">CSS3   <i class="fa-brands fa-css3-alt fa-beat"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">JAVASCRIPT   <i class="fa-brands fa-square-js fa-beat"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">SQL   <i class="fa-solid fa-database fa-beat"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">PYTHON   <i class="fa-brands fa-python fa-beat"></i></a></li>
+								<li><a className="dropdown-item text-success" href="#">REACT   <i class="fa-brands fa-react fa-beat"></i></a></li>
 							</ul>
 						</li>
 						<li className="nav-item">
