@@ -35,7 +35,7 @@ export const Navbar = () => {
 								Login <i className="fa-solid fa-right-to-bracket"></i>
 							</a>
 							<ul className="dropdown-menu">
-								<input className="form-control me-2" type="Login" placeholder="Login"/> <i className="fa-solid fa-circle-user"/>
+								<input className="form-control me-2" type="Login" placeholder="Login" /> <i className="fa-solid fa-circle-user" />
 								<li><a className="dropdown-item" href="#">Password  <i className="fa-solid fa-lock"></i></a></li>
 								<li><hr className="dropdown-divider" /></li>
 								<li><a className="dropdown-item" href="#">Log Out <i className="fa-solid fa-share-from-square"></i></a></li>

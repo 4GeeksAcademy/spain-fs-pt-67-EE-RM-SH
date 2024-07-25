@@ -12,15 +12,52 @@ body, html {
    position: relative;
    width: 20rem;
    background: rgb(10, 10, 10);
-   /* border-color: rgb(3, 53, 22); */
+   border-color: rgb(3, 53, 22);
    z-index: 2;
- } 
+   transition: box-shadow 0.1s ease-in-out; /* Transición suave */
+} 
  
- .card:hover {
-   transform: scale(1.2);
-   border-color: greenyellow;
- }
- 
+
+.card:hover {
+ box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), /* Primer nivel de sombra */
+             0 0 40px rgba(0, 255, 0, 0.5), /* Segundo nivel de sombra */
+             0 0 60px rgba(0, 255, 0, 0.5); /* Tercer nivel de sombra */
+  transform: scale(1.09);
+  border-color: greenyellow;
+}
+
+
+
+.time {
+  z-index: -2;
+  position: relative;
+  width: 50rem;
+  margin: auto;
+  color: red;
+  font-size: 40px;
+  margin-bottom: 60px;
+  padding: 10px;
+  border-bottom: solid 8px rgb(77, 2, 2);
+  border-top: solid 4px rgb(77, 2, 2);
+  border-left: solid 4px rgb(77, 2, 2);
+  border-right: solid 4px rgb(77, 2, 2);
+  border-radius: 10px; /* Opcional, para redondear las esquinas */
+
+  /* Efecto 3D */
+  background: #000000; /* Fondo oscuro para resaltar el borde */
+  box-shadow: 
+    5px 5px 10px rgba(0, 0, 0, 0.5), /* Sombra para dar profundidad */
+    -5px -5px 10px rgba(255, 255, 255, 0.1); /* Resplandor sutil para un efecto de luz */
+}
+
+
+.counter{
+  z-index: -2;
+  position: relative;
+  color: red; 
+  margin-bottom: 20px;
+}
+
  
  .card-img-top{
    width: 300px;
@@ -35,16 +72,16 @@ body, html {
  .card-cost1{
    padding: 0;
    margin-top: none;
-   font-size: 16px;
+   font-size: 25px;
    text-decoration: line-through;
-   color: red;
+   color: rgb(253, 253, 253);
  }
  
  .card-cost2{
    padding: 0;
    margin-top: none;
    font-size: 25px;
-   color: white;
+   color: rgb(255, 0, 0);
  }
  
  img{
