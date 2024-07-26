@@ -1,7 +1,105 @@
-/*
-    home.css: This website contains selectors only used in home.css
+body, html {
+  background-color: black;
+  color: white;
+  height: 100vh;
+  width: 100%;
+  z-index: -2;
+  position: relative; 
+ }
+ 
+  .card{
+   margin-bottom: 40px;
+   position: relative;
+   width: 20rem;
+   background: rgb(10, 10, 10);
+   border-color: rgb(3, 53, 22);
+   z-index: 2;
+   transition: box-shadow 0.1s ease-in-out; /* Transición suave */
+} 
+ 
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.card:hover {
+ box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), /* Primer nivel de sombra */
+             0 0 40px rgba(0, 255, 0, 0.5), /* Segundo nivel de sombra */
+             0 0 60px rgba(0, 255, 0, 0.5); /* Tercer nivel de sombra */
+  transform: scale(1.09);
+  border-color: greenyellow;
+}
+
+
+
+.time {
+  z-index: -2;
+  position: relative;
+  width: 50rem;
+  margin: auto;
+  color: red;
+  font-size: 40px;
+  margin-bottom: 60px;
+  padding: 10px;
+  border-bottom: solid 8px rgb(77, 2, 2);
+  border-top: solid 4px rgb(77, 2, 2);
+  border-left: solid 4px rgb(77, 2, 2);
+  border-right: solid 4px rgb(77, 2, 2);
+  border-radius: 10px; /* Opcional, para redondear las esquinas */
+
+  /* Efecto 3D */
+  background: #000000; /* Fondo oscuro para resaltar el borde */
+  box-shadow: 
+    5px 5px 10px rgba(0, 0, 0, 0.5), /* Sombra para dar profundidad */
+    -5px -5px 10px rgba(255, 255, 255, 0.1); /* Resplandor sutil para un efecto de luz */
+}
+
+
+.counter{
+  z-index: -2;
+  position: relative;
+  color: red; 
+  margin-bottom: 20px;
+}
+
+ 
+ .card-img-top{
+   width: 300px;
+   height: 100px;
+   object-fit: cover;
+ }
+ 
+ .card-title{
+   font-size: 20px;
+ }
+ 
+ .card-cost1{
+   padding: 0;
+   margin-top: none;
+   font-size: 25px;
+   text-decoration: line-through;
+   color: rgb(253, 253, 253);
+ }
+ 
+ .card-cost2{
+   padding: 0;
+   margin-top: none;
+   font-size: 25px;
+   color: rgb(255, 0, 0);
+ }
+ 
+ img{
+   margin-top: 12px;
+ }
+ 
+ .background-home{
+   margin: 0;
+   height: 100vh;
+   position: absolute;
+   width: 100%;
+   z-index: -1;
+   object-fit: cover;
+ }
+ 
+ .row{
+   display: flex;
+   justify-content: center;
+   margin: 0;
+   padding: 0;
+ }
