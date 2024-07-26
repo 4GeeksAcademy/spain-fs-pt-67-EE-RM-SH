@@ -1,3 +1,9 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+.navbar{
+    border-bottom: 1px;
+    border-bottom-style: solid ;
+    border-color: greenyellow;
+    background-color: rgb(10, 10, 10);
+}
