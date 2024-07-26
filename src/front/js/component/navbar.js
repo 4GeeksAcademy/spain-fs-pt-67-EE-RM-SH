@@ -1,13 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import "../../styles/navbar.css";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-expand-lg bg-dark">
+		// <div className="container-fluid"/>
+		<nav className="navbar navbar-expand-lg p-0">
 			<div className="container-fluid">
 				<Link to="/" className="navbar-brand text-success" href="#">
-					<img src="https://www.frikibunker.es/productos/imagenes/img_2268_e13b929bd6d29fce1e2db87430edb5c8_1.png" alt="Logo" width="40" height="40" className="d-inline-block align-text-top" />
-					CULTURE CODE ACADEMY
+					<img src="https://www.frikibunker.es/productos/imagenes/img_2268_e13b929bd6d29fce1e2db87430edb5c8_1.png" alt="Logo" width="60" height="" className="d-inline-block align-text-center" />
+					KULTURE CODE ACADEMY
 				</Link>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
