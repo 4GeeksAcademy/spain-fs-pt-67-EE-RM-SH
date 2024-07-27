@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-expand-lg bg-dark">
+		<nav className="navbar navbar-expand-lg ">
 			<div className="container-fluid">
 				<Link to="/" className="navbar-brand text-success" href="#">
 					<img src="https://www.frikibunker.es/productos/imagenes/img_2268_e13b929bd6d29fce1e2db87430edb5c8_1.png" alt="Logo" width="40" height="40" className="d-inline-block align-text-top" />
