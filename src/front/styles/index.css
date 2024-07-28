@@ -7,3 +7,9 @@
     border-color: greenyellow;
     background-color: rgb(10, 10, 10);
 }
+
+.custom-brand {
+    font-size: 1.5rem; /* Tamaño de letra más grande */
+    font-weight: bold; /* Letras más gruesas */
+    padding: 0;
+  }
