@@ -26,7 +26,7 @@ class User(db.Model):
             "name": self.name,
             "lastname": self.lastname,
             # do not serialize the password, its a security breach
-        }"""
+        }
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
