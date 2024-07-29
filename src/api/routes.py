@@ -1,9 +1,8 @@
 from flask import Blueprint, request, jsonify, abort
 from api.models import db, User, Courses, Lesson, Orders, Order_item
+api = Blueprint("api", __name__)
 
-api = Blueprint('api', __name__)
-
-@api.route('/hello', methods=['POST', 'GET'])
+@api.route("/hello", methods=["POST", "GET"])
 def handle_hello():
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
@@ -59,14 +58,12 @@ def delete_user(id):
         abort(404)
     db.session.delete(user)
     db.session.commit()
-    return '', 204
-
-@api.route('/courses', methods=['GET'])
+    return "", 204
+@api.route("/courses", methods=["GET"])
 def get_courses():
     courses = Courses.query.all()
     return jsonify([course.serialize() for course in courses])
-
-@api.route('/course/<int:id>', methods=['GET'])
+@api.route("/course/<int:id>", methods=["GET"])
 def get_course(id):
     course = Courses.query.get(id)
     if not course:
