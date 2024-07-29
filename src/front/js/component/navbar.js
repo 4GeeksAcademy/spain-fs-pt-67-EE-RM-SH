@@ -6,7 +6,7 @@ export const Navbar = () => {
 
 		<nav className="navbar navbar-expand-lg p-0">
 			<div className="container-fluid">
-				<Link to="/" className="navbar-brand text-success" href="#">
+				<Link to="/" className="navbar-brand text-success custom-brand">
 					<img src="https://www.frikibunker.es/productos/imagenes/img_2268_e13b929bd6d29fce1e2db87430edb5c8_1.png" alt="Logo" width="60" height="" className="d-inline-block align-text-center" />
 					CULTURE CODE ACADEMY
 				</Link>
