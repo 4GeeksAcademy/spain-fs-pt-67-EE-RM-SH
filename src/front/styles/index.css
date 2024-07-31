@@ -87,3 +87,26 @@
     background-color: #460000b0;
 } */
 
+.accordion{
+    width: 100%;
+    background-color: black;
+}
+
+.accordion-item{
+    background-color: black;
+}
+
+.accordion-header{
+    background-color: black;
+}
+
+
+
+
+
+.accordion-button{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
