@@ -27,7 +27,8 @@ class User(db.Model):
             "lastname": self.lastname,
             # do not serialize the password, its a security breach
         }
-    
+
+
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
@@ -76,8 +77,7 @@ class Orders(db.Model):
     total = db.Column(db.String(120), unique=True, nullable=False)
     status = db.Column(db.String(120), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
-
-
+    
     def serialize(self):
         return {
             "id": self.id,
