@@ -1,3 +1,112 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+.navbar{
+    border-bottom: 1px;
+    border-bottom-style: solid ;
+    border-color: greenyellow;
+    background-color: rgb(10, 10, 10);
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.login-container label {
+    color: rgb(0, 255, 34);
+    width: 100%;
+    text-align: center;
+    background-color: #1313137f;
+    font-size: 2.1rem; 
+    margin-bottom: 10px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.login-container input:focus {
+    animation: inputFocus 0.5s ease-in-out forwards;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1313137f;
+    color: #fff;
+    font-size: 1.7rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #064600b0;
+}
+
+
+/* Definir la animación para los inputs */
+@keyframes inputFocus {
+    0% {
+        box-shadow: 0 0 0 0 rgba(166, 255, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 10px 5px rgba(60, 148, 9, 0.7);
+    }
+}
+
+.registro{
+    text-decoration: none;
+    color: chartreuse;
+    background-color: #1313137f;
+    color: #fff;
+    font-size: 1.7rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* .registro:hover {
+    background-color: #460000b0;
+} */
+
+.accordion{
+    width: 100%;
+    background-color: black;
+}
+
+.accordion-item{
+    background-color: black;
+}
+
+.accordion-header{
+    background-color: black;
+}
+
+
+
+
+
+.accordion-button{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}

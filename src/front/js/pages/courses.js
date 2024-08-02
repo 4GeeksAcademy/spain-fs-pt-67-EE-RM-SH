@@ -14,8 +14,8 @@ export const Courses = () => {
 
 	// Fecha y hora objetivo (3 días, 22 horas, 30 minutos y 24 segundos desde ahora)
 	const targetDate = new Date();
-	targetDate.setDate(targetDate.getDate() + 3);
-	targetDate.setHours(targetDate.getHours() + 22);
+	targetDate.setDate(targetDate.getDate() + 2);
+	targetDate.setHours(targetDate.getHours() + 10);
 	targetDate.setMinutes(targetDate.getMinutes() + 30);
 	targetDate.setSeconds(targetDate.getSeconds() + 24);
 
