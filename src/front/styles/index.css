@@ -25,7 +25,7 @@
 }
 
 .login-container label {
-    color: red;
+    color: rgb(0, 255, 34);
     width: 100%;
     text-align: center;
     background-color: #1313137f;
@@ -58,17 +58,17 @@
 }
 
 .login-container button:hover {
-    background-color: #460000b0;
+    background-color: #064600b0;
 }
 
 
 /* Definir la animación para los inputs */
 @keyframes inputFocus {
     0% {
-        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+        box-shadow: 0 0 0 0 rgba(166, 255, 0, 0.7);
     }
     100% {
-        box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.7);
+        box-shadow: 0 0 10px 5px rgba(60, 148, 9, 0.7);
     }
 }
 
