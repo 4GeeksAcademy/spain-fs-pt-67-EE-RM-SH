@@ -7,6 +7,10 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 
 
+	
+
+
+
 
 	return (
 		<h1>Esto es la página del Login</h1>
