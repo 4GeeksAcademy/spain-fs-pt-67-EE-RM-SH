@@ -1,6 +1,13 @@
 from flask import Blueprint, request, jsonify, abort
 from api.models import db, User, Courses, Lesson, Orders, Order_item
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from api.models import db
+
+
+
+
 api = Blueprint("api", __name__)
+
 
 @api.route("/hello", methods=["POST", "GET"])
 def handle_hello():
@@ -9,7 +16,38 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
-@api.route('/users', methods=['GET'])
+
+# Create a route to authenticate your users and return JWTs. The
+# create_access_token() function is used to actually generate the JWT.
+@api.route("/login", methods=["POST"])
+def login():
+
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    print(email, password)
+    user_query = User.query.filter_by(email=email).first()
+    print(user_query.serialize())
+    if email != user_query.email or password != user_query.password:
+        return jsonify({"msg": "Bad username or password"}), 401
+    
+    
+
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
+
+
+# Protect a route with jwt_required, which will kick out requests
+# without a valid JWT present.
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
+
+
+@api.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
     return jsonify([user.serialize() for user in users])
@@ -20,8 +58,7 @@ def get_user(id):
     if not user:
         abort(404)
     return jsonify(user.serialize())
-
-@api.route('/user', methods=['POST'])
+@api.route("/registration", methods=["POST"])
 def create_user():
     data = request.get_json()
     new_user = User(
