@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 
+
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -27,7 +28,9 @@ class User(db.Model):
             "lastname": self.lastname,
             "password": self.password
             # do not serialize the password, its a security breach
+            
         }
+
 
 
 class Courses(db.Model):
