@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop.js";
 import { BackendURL } from "./component/backendURL.js";
@@ -19,6 +19,12 @@ import { Footer } from "./component/footer.js";
 
 //create your first component
 const Layout = () => {
+    const { store, actions } = useContext(Context);
+    useEffect (()=>{
+        if (! store.token && localStorage.getItem("jwt-token")){
+            actions.setToken(localStorage.getItem("jwt-token"));
+        }
+    },[])
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";

@@ -58,6 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				const {token} =await response.json();
+				localStorage.setItem("jwt-token",token);
 				const store=getStore();
 				setStore({...store,token});
 				return true
@@ -65,6 +66,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return false;
 			}
 		
+			},
+			setToken:(token) =>{
+				setStore({...store,token});	
 			}
 		}
 	};

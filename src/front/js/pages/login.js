@@ -45,7 +45,7 @@ export const Login = () => {
 				</Link>
 			</div>
 			
-				<button onClick={() => handleLogin() }><h3></h3>Login</button>
+				<button onClick={() => handleLogin() }><h3>Login</h3></button>
 			
 		</div>
 	);
