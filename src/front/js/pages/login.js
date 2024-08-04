@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -9,10 +9,9 @@ export const Login = () => {
 	// const {actions} = useContext(Context)
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
-	const handleLogin = async (e) => {
-		e.preventDefault()
+	const handleLogin = async () => {
 		const logged = await actions.login(email, password)
 
 		if (logged) {
@@ -22,7 +21,7 @@ export const Login = () => {
 
 	return (
 		<div className="login-container">
-			<form onSubmit={handleLogin}>
+			<div>
 				<div>
 					<label htmlFor="email">Email:</label>
 					<input
@@ -41,13 +40,14 @@ export const Login = () => {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>
-				<button type="submit">Login</button>
-			</form>
-			<Link className="registro" to="/registration">
-				<button><h3>Registrarse</h3></button>
-			</Link>
+				<Link className="registro" to="/registration">
+				<button>Registering</button>
+				</Link>
+			</div>
+			
+				<button onClick={() => handleLogin() }><h3></h3>Login</button>
+			
 		</div>
 	);
 };
-
 

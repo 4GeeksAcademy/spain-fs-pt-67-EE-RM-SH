@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			store:null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -46,6 +47,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			login:async (email, password)=> {
+			try{
+				const response= await fetch(process.env.BACKEND_URL + "/api/login",{
+					method:"POST",
+					body:JSON.stringify({email, password}),
+					headers:{
+						"Content-Type":"application/json"
+					}
+				});
+				const {token} =await response.json();
+				const store=getStore();
+				setStore({...store,token});
+				return true
+			}catch(e){
+				return false;
+			}
+		
 			}
 		}
 	};
