@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d662a792e86d
+Revision ID: a3a7dc4f7e84
 Revises: 
-Create Date: 2024-07-31 17:27:06.766892
+Create Date: 2024-08-05 17:29:11.571626
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd662a792e86d'
+revision = 'a3a7dc4f7e84'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,8 +25,7 @@ def upgrade():
     sa.Column('price', sa.String(length=120), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('description'),
-    sa.UniqueConstraint('name'),
-    sa.UniqueConstraint('price')
+    sa.UniqueConstraint('name')
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -39,8 +38,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('lastname'),
-    sa.UniqueConstraint('name'),
-    sa.UniqueConstraint('role')
+    sa.UniqueConstraint('name')
     )
     op.create_table('lesson',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -54,8 +52,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['course_id'], ['courses.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('author'),
-    sa.UniqueConstraint('category'),
     sa.UniqueConstraint('description'),
     sa.UniqueConstraint('title'),
     sa.UniqueConstraint('url_video')
@@ -68,11 +64,7 @@ def upgrade():
     sa.Column('status', sa.String(length=120), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('methods_payment'),
-    sa.UniqueConstraint('payment_date'),
-    sa.UniqueConstraint('status'),
-    sa.UniqueConstraint('total')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('order_item',
     sa.Column('id', sa.Integer(), nullable=False),
