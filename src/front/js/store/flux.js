@@ -21,10 +21,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: async () => {
+			login: async (email, password) => {
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const resp = await fetch(process.env.BACKEND_URL + "api/login",{method: 'POST', // Método de la petición
+						headers: {
+							'Content-Type': 'application/json', // Tipo de contenido que se envía
+							// Aquí puedes agregar más headers si es necesario
+						},
+						body: JSON.stringify({
+							// Aquí va el cuerpo de la petición, por ejemplo:
+							email: email,
+							password: password
+						})})
+
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
@@ -33,6 +43,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
