@@ -3,8 +3,12 @@ from api.models import db, User, Courses, Lesson, Orders, Order_item
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from api.models import db
 import bcrypt
+from flask_cors import CORS
 
 api = Blueprint("api", __name__)
+CORS(api)
+
+current_user = User.name
 
 @api.route("/hello", methods=["POST", "GET"])
 def handle_hello():
@@ -59,41 +63,28 @@ def get_user(id):
         abort(404)
     return jsonify(user.serialize())
 
+   
+#     # access_token = create_access_token(identity='email')
+#     # return jsonify(response_body,access_token=access_token), 200
 
 
-# @api.route('/users', methods=['POST'])
-# @jwt_required()
-# def create_user():
-#     body = request.json
-#     me = Users(name=body["name"], email=body["email"], password=body["password"], is_active=body["is_active"])
-#     db.session.add(me)
-#     db.session.commit()
-#     response_body = {
-#         "msg": "Ok",
-#         "id": me.id
-#     }
-#     return jsonify(response_body), 200
-
-
-
-
-# La ruta para registrar el usuario no funciona
-@api.route("/registration", methods=["POST"])
-def create_user():
-    data = request.get_json()
-    new_user = User(
-        role=data['role'],
-        name=data['name'],
-        lastname=data['lastname'],
-        email=data['email'],
-        password=data['password'],
-        is_active=data['is_active']
-    )
-    db.session.add(new_user)
+@api.route('/registration', methods=['POST'])
+def create_usuarios():
+    body = request.json
+    me = User(name=body["name"], lastname=body["lastname"], email=body["email"], password=body["password"],role=body["role"] , is_active=True)
+    db.session.add(me)
     db.session.commit()
-    
-    access_token = create_access_token(identity='email')
+    response_body = {
+        "msg": "Ok",
+        "id": me.id
+    }
+    return jsonify(response_body), 200
+ 
+    access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
+
+
+
 
 password = b"super secret password"
      # Hash a password for the first time, with a randomly-generated salt
@@ -104,6 +95,9 @@ if bcrypt.checkpw(password, hashed):
     print("It Matches!")
 else:
     print("It Does not Match :(")
+
+
+
 
     
 @api.route('/user/<int:id>', methods=['PUT'])
