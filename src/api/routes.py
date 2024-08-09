@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify, abort
 from api.models import db, User, Courses, Lesson, Orders, Order_item
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, get_jwt
+from datetime import timedelta
+# import redis
 from api.models import db
 import bcrypt
 from flask_cors import CORS
@@ -10,12 +12,34 @@ CORS(api)
 
 current_user = User.name
 
+# jwt_redis_blocklist = redis.StrictRedis(
+#     host="localhost", port=6379, db=0, decode_responses=True
+# )
+
 @api.route("/hello", methods=["POST", "GET"])
 def handle_hello():
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
     return jsonify(response_body), 200
+
+
+
+@api.route('/registration', methods=['POST'])
+def create_user():
+    body = request.json
+    hashed_password = bcrypt.generate_password_hash(body["password"]).decode('utf-8') 
+    me = User(name=body["name"], lastname=body["lastname"], email=body["email"], password= hashed_password, role=body["role"] , is_active=True)
+    db.session.add(me)
+    db.session.commit()
+    response_body = {
+        "msg": "Ok",
+        "id": me.id,
+    }
+    return jsonify(response_body), 200
+
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
 
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
@@ -24,6 +48,7 @@ def login():
 
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    hashed_password = bcrypt.generate_password_hash(body["password"]).decode('utf-8') 
     user_query = User.query.filter_by(email=email).first()
     print(user_query.serialize())
     if email != user_query.email or password != user_query.password:
@@ -32,15 +57,17 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-password = b"super secret password"
-     # Hash a password for the first time, with a randomly-generated salt
-hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-    # Check that an unhashed password matches one that has previously been
-    # hashed
-if bcrypt.checkpw(password, hashed):
-    print("It Matches!")
-else:
-    print("It Does not Match :(")
+
+@api.route("/logout", methods=["DELETE"])
+@jwt_required(verify_type=False)
+def logout():
+    token = get_jwt()
+    jti = token["jti"]
+    ttype = token["type"]
+    jwt_redis_blocklist.set(jti, "")
+
+    return jsonify(msg=f"{ttype.capitalize()} token successfully revoked")
+
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
@@ -63,43 +90,7 @@ def get_user(id):
         abort(404)
     return jsonify(user.serialize())
 
-   
-#     # access_token = create_access_token(identity='email')
-#     # return jsonify(response_body,access_token=access_token), 200
 
-
-@api.route('/registration', methods=['POST'])
-def create_usuarios():
-    body = request.json
-    me = User(name=body["name"], lastname=body["lastname"], email=body["email"], password=body["password"],role=body["role"] , is_active=True)
-    db.session.add(me)
-    db.session.commit()
-    response_body = {
-        "msg": "Ok",
-        "id": me.id
-    }
-    return jsonify(response_body), 200
- 
-    access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
-
-
-
-
-password = b"super secret password"
-     # Hash a password for the first time, with a randomly-generated salt
-hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-    # Check that an unhashed password matches one that has previously been
-    # hashed
-if bcrypt.checkpw(password, hashed):
-    print("It Matches!")
-else:
-    print("It Does not Match :(")
-
-
-
-
-    
 @api.route('/user/<int:id>', methods=['PUT'])
 def update_user(id):
     user = User.query.get(id)
@@ -170,11 +161,13 @@ def delete_course(id):
     return '', 204
 
 @api.route('/lessons', methods=['GET'])
+@jwt_required()
 def get_lessons():
     lessons = Lesson.query.all()
     return jsonify([lesson.serialize() for lesson in lessons])
 
 @api.route('/lesson/<int:id>', methods=['GET'])
+@jwt_required()
 def get_lesson(id):
     lesson = Lesson.query.get(id)
     if not lesson:
@@ -182,6 +175,7 @@ def get_lesson(id):
     return jsonify(lesson.serialize())
 
 @api.route('/lesson', methods=['POST'])
+@jwt_required()
 def create_lesson():
     data = request.get_json()
     new_lesson = Lesson(
@@ -198,6 +192,7 @@ def create_lesson():
     return jsonify(new_lesson.serialize()), 201
 
 @api.route('/lesson/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_lesson(id):
     lesson = Lesson.query.get(id)
     if not lesson:
@@ -214,6 +209,7 @@ def update_lesson(id):
     return jsonify(lesson.serialize())
 
 @api.route('/lesson/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_lesson(id):
     lesson = Lesson.query.get(id)
     if not lesson:
