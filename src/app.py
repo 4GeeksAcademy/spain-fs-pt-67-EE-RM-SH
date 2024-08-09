@@ -11,7 +11,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from flask_jwt_extended import JWTManager
-import bcrypt
+from flask_bcrypt import Bcrypt 
 
 
 # from models import Person
@@ -23,7 +23,7 @@ app = Flask(__name__)
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 jwt = JWTManager(app)
-bcrypt = bcrypt(app) 
+bcrypt = Bcrypt(app) 
 
 
 app.url_map.strict_slashes = False
