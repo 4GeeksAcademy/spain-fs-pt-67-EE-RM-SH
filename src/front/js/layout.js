@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react"; // Agrega useContext aquí
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop.js";
 import { BackendURL } from "./component/backendURL.js";
@@ -10,20 +10,23 @@ import { Payment } from "./pages/payment.js";
 import { Blog } from "./pages/blog.js";
 import { Courses } from "./pages/courses.js";
 import { Student } from "./pages/student.js";
-import injectContext from "./store/appContext.js";
+import injectContext, { Context } from "./store/appContext.js"; // Asegúrate de importar Context
 
 import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer.js";
 
-
-
 //create your first component
 const Layout = () => {
-    //the basename is used when your project is published in a subdirectory and not in the root of the domain
-    // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
+    const { store, actions } = useContext(Context); // Ahora useContext debería funcionar correctamente
+    useEffect(() => {
+        if (!store.token && localStorage.getItem("jwt-token")) {
+            actions.setToken(localStorage.getItem("jwt-token"));
+        }
+    }, []);
+
     const basename = process.env.BASENAME || "";
 
-    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL === "") return <BackendURL />;
 
     return (
         <div>
@@ -48,3 +51,4 @@ const Layout = () => {
 };
 
 export default injectContext(Layout);
+
