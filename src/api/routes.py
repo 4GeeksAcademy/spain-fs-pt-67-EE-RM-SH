@@ -311,3 +311,19 @@ def delete_order_item(id):
     db.session.delete(order_item)
     db.session.commit()
     return '', 204
+
+@api.route("/login", methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+    # Query your database for username and password
+    user = User.query.filter_by(email=email, password=password).first()
+
+    if user is None:
+        # The user was not found on the database
+        return jsonify({"msg": "Bad email or password"}), 401
+    
+    # Create a new token with the user id inside
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token, "user_id": user.id })
