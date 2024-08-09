@@ -4,13 +4,14 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 from datetime import timedelta
 # import redis
 from api.models import db
-import bcrypt
+from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_cors import CORS
 
 api = Blueprint("api", __name__)
 CORS(api)
 
 current_user = User.name
+
 
 # jwt_redis_blocklist = redis.StrictRedis(
 #     host="localhost", port=6379, db=0, decode_responses=True
@@ -27,19 +28,19 @@ def handle_hello():
 
 @api.route('/registration', methods=['POST'])
 def create_user():
+    
     body = request.json
-    hashed_password = bcrypt.generate_password_hash(body["password"]).decode('utf-8') 
+    hashed_password = generate_password_hash(body["password"]).decode('utf-8') 
     me = User(name=body["name"], lastname=body["lastname"], email=body["email"], password= hashed_password, role=body["role"] , is_active=True)
     db.session.add(me)
     db.session.commit()
+    access_token = create_access_token(identity=me.email)
     response_body = {
         "msg": "Ok",
         "id": me.id,
+        "access_token": access_token
     }
     return jsonify(response_body), 200
-
-    access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
 
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
@@ -48,10 +49,10 @@ def login():
 
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    hashed_password = bcrypt.generate_password_hash(body["password"]).decode('utf-8') 
     user_query = User.query.filter_by(email=email).first()
+    is_valid = check_password_hash(user_query.password, password) 
     print(user_query.serialize())
-    if email != user_query.email or password != user_query.password:
+    if email != user_query.email or not is_valid:
         return jsonify({"msg": "Bad username or password"}), 401
     
     access_token = create_access_token(identity=email)
