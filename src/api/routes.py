@@ -1,7 +1,14 @@
 from flask import Blueprint, request, jsonify, abort
 from api.models import db, User, Courses, Lesson, Orders, Order_item
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from api.models import db
+import bcrypt
+from flask_cors import CORS
+
 api = Blueprint("api", __name__)
+CORS(api)
+
+current_user = User.name
 
 @api.route("/hello", methods=["POST", "GET"])
 def handle_hello():
@@ -10,7 +17,41 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
-@api.route('/users', methods=['GET'])
+# Create a route to authenticate your users and return JWTs. The
+# create_access_token() function is used to actually generate the JWT.
+@api.route("/login", methods=["POST"])
+def login():
+
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    user_query = User.query.filter_by(email=email).first()
+    print(user_query.serialize())
+    if email != user_query.email or password != user_query.password:
+        return jsonify({"msg": "Bad username or password"}), 401
+    
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
+
+password = b"super secret password"
+     # Hash a password for the first time, with a randomly-generated salt
+hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    # Check that an unhashed password matches one that has previously been
+    # hashed
+if bcrypt.checkpw(password, hashed):
+    print("It Matches!")
+else:
+    print("It Does not Match :(")
+
+# Protect a route with jwt_required, which will kick out requests
+# without a valid JWT present.
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
+@api.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
     return jsonify([user.serialize() for user in users])
@@ -22,21 +63,43 @@ def get_user(id):
         abort(404)
     return jsonify(user.serialize())
 
-@api.route('/user', methods=['POST'])
-def create_user():
-    data = request.get_json()
-    new_user = User(
-        role=data['role'],
-        name=data['name'],
-        lastname=data['lastname'],
-        email=data['email'],
-        password=data['password'],
-        is_active=data['is_active']
-    )
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify(new_user.serialize()), 201
+   
+#     # access_token = create_access_token(identity='email')
+#     # return jsonify(response_body,access_token=access_token), 200
 
+
+@api.route('/registration', methods=['POST'])
+def create_usuarios():
+    body = request.json
+    me = User(name=body["name"], lastname=body["lastname"], email=body["email"], password=body["password"],role=body["role"] , is_active=True)
+    db.session.add(me)
+    db.session.commit()
+    response_body = {
+        "msg": "Ok",
+        "id": me.id
+    }
+    return jsonify(response_body), 200
+ 
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
+
+
+
+
+password = b"super secret password"
+     # Hash a password for the first time, with a randomly-generated salt
+hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    # Check that an unhashed password matches one that has previously been
+    # hashed
+if bcrypt.checkpw(password, hashed):
+    print("It Matches!")
+else:
+    print("It Does not Match :(")
+
+
+
+
+    
 @api.route('/user/<int:id>', methods=['PUT'])
 def update_user(id):
     user = User.query.get(id)
@@ -60,10 +123,12 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return "", 204
+
 @api.route("/courses", methods=["GET"])
 def get_courses():
     courses = Courses.query.all()
     return jsonify([course.serialize() for course in courses])
+
 @api.route("/course/<int:id>", methods=["GET"])
 def get_course(id):
     course = Courses.query.get(id)

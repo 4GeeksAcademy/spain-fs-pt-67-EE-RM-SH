@@ -3,11 +3,12 @@ from flask_migrate import Migrate
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 
+
 db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    role  = db.Column(db.String(120), unique=True, nullable=False)
+    role  = db.Column(db.String(120), unique=False, nullable=False)
     name  = db.Column(db.String(120), unique=True, nullable=False)
     lastname  = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -25,15 +26,19 @@ class User(db.Model):
             "email": self.email,
             "name": self.name,
             "lastname": self.lastname,
+            "password": self.password,
+            "is_active": self.is_active
             # do not serialize the password, its a security breach
+            
         }
+
 
 
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.String(120), unique=True, nullable=False)
-    price = db.Column(db.String(120), unique=True, nullable=False)
+    price = db.Column(db.String(120), unique=False, nullable=False)
 
     def serialize(self):
     
@@ -48,10 +53,10 @@ class Courses(db.Model):
 class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url_video = db.Column(db.String(120), unique=True, nullable=False)
-    category = db.Column(db.String(120), unique=True, nullable=False)
+    category = db.Column(db.String(120), unique=False, nullable=False)
     title = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.String(120), unique=True, nullable=False)
-    author = db.Column(db.String(120), unique=True, nullable=False)
+    author = db.Column(db.String(120), unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey(Courses.id), nullable=False)
    
@@ -72,10 +77,10 @@ class Lesson(db.Model):
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    methods_payment = db.Column(db.String(120), unique=True, nullable=False)
-    payment_date = db.Column(db.String(120), unique=True, nullable=False)
-    total = db.Column(db.String(120), unique=True, nullable=False)
-    status = db.Column(db.String(120), unique=True, nullable=False)
+    methods_payment = db.Column(db.String(120), unique=False, nullable=False)
+    payment_date = db.Column(db.String(120), unique=False, nullable=False)
+    total = db.Column(db.String(120), unique=False, nullable=False)
+    status = db.Column(db.String(120), unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     
     def serialize(self):

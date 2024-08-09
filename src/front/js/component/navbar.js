@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import bgVideo from '../../videos/133C.gif';
 
 export const Navbar = () => {
 	return (
