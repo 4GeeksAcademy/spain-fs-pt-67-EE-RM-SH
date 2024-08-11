@@ -311,4 +311,3 @@ def delete_order_item(id):
     db.session.delete(order_item)
     db.session.commit()
     return '', 204
-
