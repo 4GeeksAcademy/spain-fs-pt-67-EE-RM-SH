@@ -26,7 +26,7 @@ export const Navbar = () => {
 						</li>
 						<li className="nav-item dropdown">
 							<Link to="/login" className="nav-link text-success" href="#" role="button" aria-expanded="false">
-								Iniciar sesion <i className="fa-solid fa-right-to-bracket"></i>
+								Login <i className="fa-solid fa-right-to-bracket"></i>
 							</Link>
 
 						</li>

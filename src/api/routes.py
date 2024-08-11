@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, abort
 from api.models import db, User, Courses, Lesson, Orders, Order_item
+from flask_jwt_extended import create_access_token
 api = Blueprint("api", __name__)
 
 @api.route("/hello", methods=["POST", "GET"])
@@ -12,12 +13,14 @@ def handle_hello():
 def get_users():
     users = User.query.all()
     return jsonify([user.serialize() for user in users])
+
 @api.route("/user/<int:id>", methods=["GET"])
 def get_user(id):
     user = User.query.get(id)
     if not user:
         abort(404)
     return jsonify(user.serialize())
+
 @api.route("/user", methods=["POST"])
 def create_user():
     data = request.get_json()
@@ -32,6 +35,7 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.serialize()), 201
+
 @api.route("/user/<int:id>", methods=["PUT"])
 def update_user(id):
     user = User.query.get(id)
@@ -46,6 +50,7 @@ def update_user(id):
     user.is_active = data["is_active"]
     db.session.commit()
     return jsonify(user.serialize())
+
 @api.route("/user/<int:id>", methods=["DELETE"])
 def delete_user(id):
     user = User.query.get(id)
@@ -54,16 +59,19 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return "", 204
+
 @api.route("/courses", methods=["GET"])
 def get_courses():
     courses = Courses.query.all()
     return jsonify([course.serialize() for course in courses])
+
 @api.route("/course/<int:id>", methods=["GET"])
 def get_course(id):
     course = Courses.query.get(id)
     if not course:
         abort(404)
     return jsonify(course.serialize())
+
 @api.route("/course", methods=["POST"])
 def create_course():
     data = request.get_json()
@@ -75,6 +83,7 @@ def create_course():
     db.session.add(new_course)
     db.session.commit()
     return jsonify(new_course.serialize()), 201
+
 @api.route("/course/<int:id>", methods=["PUT"])
 def update_course(id):
     course = Courses.query.get(id)
@@ -86,6 +95,7 @@ def update_course(id):
     course.price = data["price"]
     db.session.commit()
     return jsonify(course.serialize())
+
 @api.route("/course/<int:id>", methods=["DELETE"])
 def delete_course(id):
     course = Courses.query.get(id)
@@ -94,16 +104,19 @@ def delete_course(id):
     db.session.delete(course)
     db.session.commit()
     return "", 204
+
 @api.route("/lessons", methods=["GET"])
 def get_lessons():
     lessons = Lesson.query.all()
     return jsonify([lesson.serialize() for lesson in lessons])
+
 @api.route("/lesson/<int:id>", methods=["GET"])
 def get_lesson(id):
     lesson = Lesson.query.get(id)
     if not lesson:
         abort(404)
     return jsonify(lesson.serialize())
+
 @api.route("/lesson", methods=["POST"])
 def create_lesson():
     data = request.get_json()
@@ -119,6 +132,7 @@ def create_lesson():
     db.session.add(new_lesson)
     db.session.commit()
     return jsonify(new_lesson.serialize()), 201
+
 @api.route("/lesson/<int:id>", methods=["PUT"])
 def update_lesson(id):
     lesson = Lesson.query.get(id)
@@ -134,6 +148,7 @@ def update_lesson(id):
     lesson.course_id = data["course_id"]
     db.session.commit()
     return jsonify(lesson.serialize())
+
 @api.route("/lesson/<int:id>", methods=["DELETE"])
 def delete_lesson(id):
     lesson = Lesson.query.get(id)
@@ -142,16 +157,19 @@ def delete_lesson(id):
     db.session.delete(lesson)
     db.session.commit()
     return "", 204
+
 @api.route("/orders", methods=["GET"])
 def get_orders():
     orders = Orders.query.all()
     return jsonify([order.serialize() for order in orders])
+
 @api.route("/order/<int:id>", methods=["GET"])
 def get_order(id):
     order = Orders.query.get(id)
     if not order:
         abort(404)
     return jsonify(order.serialize())
+
 @api.route("/order", methods=["POST"])
 def create_order():
     data = request.get_json()
@@ -165,6 +183,7 @@ def create_order():
     db.session.add(new_order)
     db.session.commit()
     return jsonify(new_order.serialize()), 201
+
 @api.route("/order/<int:id>", methods=["PUT"])
 def update_order(id):
     order = Orders.query.get(id)
@@ -178,6 +197,7 @@ def update_order(id):
     order.status = data["status"]
     db.session.commit()
     return jsonify(order.serialize())
+
 @api.route("/order/<int:id>", methods=["DELETE"])
 def delete_order(id):
     order = Orders.query.get(id)
@@ -186,16 +206,19 @@ def delete_order(id):
     db.session.delete(order)
     db.session.commit()
     return "", 204
+
 @api.route("/order_items", methods=["GET"])
 def get_order_items():
     order_items = Order_item.query.all()
     return jsonify([order_item.serialize() for order_item in order_items])
+
 @api.route("/order_item/<int:id>", methods=["GET"])
 def get_order_item(id):
     order_item = Order_item.query.get(id)
     if not order_item:
         abort(404)
     return jsonify(order_item.serialize())
+
 @api.route("/order_item", methods=["POST"])
 def create_order_item():
     data = request.get_json()
@@ -207,6 +230,7 @@ def create_order_item():
     db.session.add(new_order_item)
     db.session.commit()
     return jsonify(new_order_item.serialize()), 201
+
 @api.route("/order_item/<int:id>", methods=["PUT"])
 def update_order_item(id):
     order_item = Order_item.query.get(id)
@@ -218,6 +242,7 @@ def update_order_item(id):
     order_item.order_id = data["order_id"]
     db.session.commit()
     return jsonify(order_item.serialize())
+
 @api.route("/order_item/<int:id>", methods=["DELETE"])
 def delete_order_item(id):
     order_item = Order_item.query.get(id)
@@ -226,3 +251,19 @@ def delete_order_item(id):
     db.session.delete(order_item)
     db.session.commit()
     return "", 204
+
+@api.route("/login", methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+    # Consulta la base de datos por el nombre de usuario y la contraseña
+    user = User.query.filter_by(email=email, password=password).first()
+
+    if user is None:
+        # el usuario no se encontró en la base de datos
+        return jsonify({"msg": "Bad email or password"}), 401
+    
+    # Crea un nuevo token con el id de usuario dentro
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token, "user_id": user.id })

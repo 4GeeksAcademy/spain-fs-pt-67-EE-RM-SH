@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			token:""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -46,9 +47,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			login:async(email, password) => {
+				try {
+					const response=await fetch(process.env.BACKEND_URL + "/api/login",{
+						method: "POST",
+						headers:{
+							"Content-Type":"application/json"
+						},
+						body:JSON.stringify({email,password})
+					});
+					if (!response.ok){
+						throw new Error("authentication-error")
+					}
+					const data= await response.json();
+					localStorage.setItem("token",data.token)
+					setStore ({token:data.token})
+				} catch (error) {
+					console.error("[flux.login]",error)
+				}
+			}
+			
+
 			}
 		}
 	};
-};
 
 export default getState;

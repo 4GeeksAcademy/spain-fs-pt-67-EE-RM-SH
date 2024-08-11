@@ -10,21 +10,21 @@ export const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	// const navigate = useNavigate();
+	console.log("email", email)
+	console.log("password", password)
 
 	const handleLogin = async (e) => {
-		e.preventDefault()
-		const logged = await actions.login(email, password)
-
-		if (logged) {
-			navigate("/home");
-		}
+		console.log("email", email)
+		console.log("password", password)
+	    e.preventDefault()
+		actions.login(email, password)
 	}
 
 	return (
 		<div className="login-container">
 			<form onSubmit={handleLogin}>
 				<div>
-					<label htmlFor="email">Email:</label>
+					<label htmlFor="email">Email</label>
 					<input
 						type="text"
 						id="email"
@@ -33,7 +33,7 @@ export const Login = () => {
 					/>
 				</div>
 				<div>
-					<label htmlFor="password">Password:</label>
+					<label htmlFor="password">Password</label>
 					<input
 						type="password"
 						id="password"
