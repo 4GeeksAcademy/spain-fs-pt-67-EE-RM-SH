@@ -22,22 +22,6 @@ export const Navbar = () => {
 							</Link>
 
 						</li>
-						<li className="nav-item">
-							<button
-								className="nav-link btn btn-link"
-								onClick={() => handleLanguageChange("es")} // Agrega una función para cambiar el idioma
-							>
-								ES
-							</button>
-						</li>
-						<li className="nav-item">
-							<button
-								className="nav-link btn btn-link"
-								onClick={() => handleLanguageChange("en")} // Agrega una función para cambiar el idioma
-							>
-								EN
-							</button>
-						</li>
 
 						<li className="nav-item">
 							<Link to="/blog" className="nav-link text-success" href="#">Blog <i className="fa-solid fa-blog"></i></Link>
