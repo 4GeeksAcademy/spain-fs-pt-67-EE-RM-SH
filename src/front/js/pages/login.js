@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
+	const navigate=useNavigate()
 
 	// const {actions} = useContext(Context)
 	const [email, setEmail] = useState('');
@@ -18,6 +20,7 @@ export const Login = () => {
 		console.log("password", password)
 	    e.preventDefault()
 		actions.login(email, password)
+		navigate("/")
 	}
 
 	return (

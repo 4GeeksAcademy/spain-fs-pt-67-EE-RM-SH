@@ -66,8 +66,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("[flux.login]",error)
 				}
-			}
+			},
 			
+			logout: () => {
+				// Limpia el token de autenticación y otros datos relacionados con el usuario
+				localStorage.removeItem("token");
+				setStore({ token: ""});
+			  },
 
 			}
 		}
