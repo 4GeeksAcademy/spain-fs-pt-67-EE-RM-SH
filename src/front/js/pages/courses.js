@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import logo from '../../img/Untitled_design-removebg-preview.png';
 import bgVideo from '../../videos/133C.gif';
+import { Link } from "react-router-dom";
 
 
 
@@ -87,6 +88,14 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -99,7 +108,15 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
+
 				</div>
 
 
@@ -111,6 +128,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -123,6 +147,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -142,6 +173,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -154,6 +192,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -166,6 +211,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -178,6 +230,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -199,6 +258,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -211,6 +277,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -223,6 +296,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
@@ -235,6 +315,13 @@ export const Courses = () => {
 						<p className="card-cost1">$25.99</p>
 						<p className="card-cost2">$19.99</p>
 						{/* <a href="#" className="btn btn-success">Comprar</a> */}
+						<div>
+							<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+						</div>
+
+						<div>
+							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+						</div>
 					</div>
 				</div>
 
