@@ -112,3 +112,51 @@ body, html {
   font-weight: bold;
   color: greenyellow;
  }
+
+
+
+.welcome-page {
+  text-align: center;
+ 
+}
+
+/* Encabezado */
+.header {
+  background-color: #008a22;
+  color: #fff;
+  padding: 60px 20px;
+}
+
+.header-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header-title {
+  font-size: 48px;
+  margin: 0;
+}
+
+/* Sección de información */
+.about-section {
+  padding: 60px 20px;
+}
+
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #008a22;
+}
+
+.section-text {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: #ffffff;
+  line-height: 1.6;
+  font-weight: bold;
+}
