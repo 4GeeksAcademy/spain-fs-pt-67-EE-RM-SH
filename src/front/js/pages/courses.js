@@ -94,7 +94,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 				</div>
@@ -113,7 +113,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 
@@ -133,7 +133,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 				</div>
@@ -152,7 +152,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 				</div>
@@ -178,7 +178,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 				</div>
@@ -197,7 +197,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 				</div>
@@ -216,7 +216,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 				</div>
@@ -235,7 +235,7 @@ export const Courses = () => {
 						</div>
 
 						<div>
-							<a href="#" className="btn1 m-3">Añadir al carrito</a>
+							<a onClick={() => actions.addFavoritsCharacters(item.uid, item.name)} href="#" className="btn1 m-3">Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i></a>
 						</div>
 					</div>
 				</div>

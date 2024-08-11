@@ -192,3 +192,113 @@
     box-shadow: 0 3px 0 #155800,
       0 4px 6px hsla(0, 0%, 0%, 0.7);
   }
+
+
+  .form-payment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px
+  }
+
+  
+  /* Estilo de etiquetas y campos de entrada */
+  .form-background {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  /* Estilo de etiquetas y campos de entrada */
+  .label-payment{
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .input-payment[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+  
+  .input-payment[type="text"]:focus {
+    border-color: #6c63ff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(99, 255, 169, 0.5);
+  }
+  
+ 
+  
+  /* Título de la sección de dirección de facturación */
+  .h3-payment{
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Efecto de enfoque en los campos de texto */
+  .input-payment[type="text"]::placeholder {
+    color: #999;
+  }
+  
+  
+  /* Estilos para el resumen del producto */
+  .product-summary {
+    background-color: #f8f8ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .product-summary span {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .product-name {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .product-price, .product-quantity {
+    color: #666;
+  }
+  
+  /* Estilo del total */
+  .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .total span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .total-price {
+    color: #6c63ff;;
+    font-size: 18px;
+  }
+
+  .div-pagar{
+    display: flex;
+    justify-content: center;
+  }
+
+  .dropdown-menu-end{
+    background-color: #0e851e;
+    color:white;
+  }
