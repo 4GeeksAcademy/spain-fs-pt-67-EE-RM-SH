@@ -8,6 +8,10 @@ import { Context } from "../store/appContext";
 export const Student = () => {
     const { store, actions } = useContext(Context);
 
+    useEffect(() => {
+        actions.getLesson()
+    }, []);
+
     return (
         <div className="text-center">
             <h1>Está es la página de estudiantes</h1>
