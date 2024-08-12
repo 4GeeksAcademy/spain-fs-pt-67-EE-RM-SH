@@ -15,7 +15,7 @@ export const Navbar = () => {
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+					<ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-4">
 						<li className="nav-item dropdown">
 							<Link to="/courses" className="nav-link text-success" href="#" role="button" aria-expanded="false">
 								Cursos <i className="fa-solid fa-school"></i>
@@ -32,11 +32,30 @@ export const Navbar = () => {
 							</Link>
 
 						</li>
-						<li className="nav-item">
+
+						<div className="dropdown">
+							<a
+								className="btn dropdown-toggle-split fw-bold s"
+								href="#"
+								role="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false"
+							>
+								<i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "#008a22" }}></i>
+							</a>
+							<ul className="dropdown-menu dropdown-menu-end">
+								<li className="container-name">
+									<button className="delete"><i className="fa-solid fa-trash-can fa-2xl"></i></button>
+								</li>
+							</ul>
+						</div>
+
+
+						{/* <li className="nav-item">
 							<Link to="/payment" className="nav-link text-success" href="#" role="button" aria-expanded="false">
-								Carrito <i className="fa-solid fa-cart-shopping"></i>
+								
 							</Link>
-						</li>
+						</li> */}
 					</ul>
 
 				</div>

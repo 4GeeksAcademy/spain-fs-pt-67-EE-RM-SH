@@ -11,6 +11,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from flask_jwt_extended import JWTManager
+from flask_bcrypt import Bcrypt 
 
 
 # from models import Person
@@ -18,6 +19,11 @@ ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+jwt = JWTManager(app)
+bcrypt = Bcrypt(app) 
 
 
 app.url_map.strict_slashes = False
