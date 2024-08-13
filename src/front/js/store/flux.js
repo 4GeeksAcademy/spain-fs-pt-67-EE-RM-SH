@@ -65,6 +65,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log(data)
             },
 
+            getUser: async (id) => {
+                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                const data = await res.json()
+                setStore({ users: data })
+                console.log(data)
+            },
+
 
             createUser: (email, password, name, lastname, role) => {
                 fetch(process.env.BACKEND_URL + "/api/registration", {
@@ -99,6 +111,21 @@ const getState = ({ getStore, getActions, setStore }) => {
             getLesson: async () => {
                 // const store=getStore()
                 const res = await fetch(process.env.BACKEND_URL + "/api/lessons", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${store.token}`,
+                        "Content-Type": "application/json"
+                    }
+                })
+                const data = await res.json()
+                setStore({ lessons: data })
+                console.log(data)
+            },
+
+
+            getLesson: async (id) => {
+                // const store=getStore()
+                const res = await fetch(process.env.BACKEND_URL + `/api/lesson${id}`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${store.token}`,
@@ -154,6 +181,20 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ courses: data })
                 console.log(data)
             },
+
+
+            getCourse: async (id) => {
+                // const store=getStore()
+                const res = await fetch(process.env.BACKEND_URL + `/api/course${id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                const data = await res.json()
+                setStore({ courses: data })
+                console.log(data)
+            },
             
 
             createCourse: (name, description, price) => {
@@ -198,6 +239,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
+            getOrder: async (id) => {
+                // const store=getStore()
+                const res = await fetch(process.env.BACKEND_URL + `/api/order${id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                const data = await res.json()
+                setStore({ orders: data })
+                console.log(data)
+            },
+
+
             crateOrders: (user_id, methods_payment, payment_date, total, status) => {
                 fetch(process.env.BACKEND_URL + "/api/order", {
                     method: 'POST',
@@ -230,6 +285,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             getOrder_Items: async () => {
                 // const store=getStore()
                 const res = await fetch(process.env.BACKEND_URL + "/api/Order_Items", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                const data = await res.json()
+                setStore({ order_Items: data })
+                console.log(data)
+            },
+
+
+            getOrder_Item: async () => {
+                // const store=getStore()
+                const res = await fetch(process.env.BACKEND_URL + `/api/Order_Item${id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
