@@ -113,7 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             createLesson: (url_video, category, title, description, author, user_id, course_id) => {
-                fetch(process.env.BACKEND_URL + "/api/lessons", {
+                fetch(process.env.BACKEND_URL + "/api/lesson", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -157,7 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             createCourse: (name, description, price) => {
-                fetch(process.env.BACKEND_URL + "/api/courses", {
+                fetch(process.env.BACKEND_URL + "/api/course", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -199,7 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
             crateOrders: (user_id, methods_payment, payment_date, total, status) => {
-                fetch(process.env.BACKEND_URL + "/api/orders", {
+                fetch(process.env.BACKEND_URL + "/api/order", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -241,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             createOrder_Item: (quantity, course_id, order_id) => {
-                fetch(process.env.BACKEND_URL + "/api/Order_Items", {
+                fetch(process.env.BACKEND_URL + "/api/Order_Item", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
