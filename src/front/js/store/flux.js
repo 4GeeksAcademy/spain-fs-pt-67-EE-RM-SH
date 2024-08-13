@@ -419,78 +419,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             // Aquí empiezan los DELETE
             deleteUser: async (id) => {
                 const actions = getActions();
@@ -506,7 +434,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             deleteCourse: async (id) => {
                 const actions = getActions();
-                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                const res = await fetch(process.env.BACKEND_URL + `/api/course/${id}`, {
                     method: "DELETE",
                 })
                 if (!res.ok) {
@@ -518,7 +446,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             deleteLesson: async (id) => {
                 const actions = getActions();
-                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                const res = await fetch(process.env.BACKEND_URL + `/api/lesson/${id}`, {
                     method: "DELETE",
                 })
                 if (!res.ok) {
@@ -530,7 +458,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             deleteOrder: async (id) => {
                 const actions = getActions();
-                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                const res = await fetch(process.env.BACKEND_URL + `/api/order/${id}`, {
                     method: "DELETE",
                 })
                 if (!res.ok) {
@@ -551,103 +479,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getUsers();
                 }
             },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             // Aquí empiezan los PUT
