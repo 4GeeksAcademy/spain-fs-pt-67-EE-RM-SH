@@ -17,7 +17,7 @@ export const Registration = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        const createUser = await actions.createUser(email, password, name, lastname)
+        const createUser = await actions.createUser(email, password, name, lastname,role)
 
         if (logged) {
             navigate("/home");
