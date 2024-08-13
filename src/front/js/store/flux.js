@@ -73,11 +73,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        "email": email,
-                        "password": password,
-                        "name": name,
-                        "lastname": lastname,
-                        "role": role
+                        email: email,
+                        password: password,
+                        name: name,
+                        lastname: lastname,
+                        role: role
 
                     })
                 })
@@ -205,11 +205,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        user_id:user_id,
-                        methods_payment:methods_payment,
-                        payment_date:payment_date,
-                        total:total,
-                        status:status
+                        user_id: user_id,
+                        methods_payment: methods_payment,
+                        payment_date: payment_date,
+                        total: total,
+                        status: status
                     })
                 })
                     .then(response => {
@@ -247,23 +247,23 @@ const getState = ({ getStore, getActions, setStore }) => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        quantity:quantity,
-                        course_id:course_id,
-                        order_id:order_id
+                        quantity: quantity,
+                        course_id: course_id,
+                        order_id: order_id
                     })
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud: ' + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Respuesta recibida:', data);
-                })
-                .catch(error => {
-                    console.error('Hubo un problema con la solicitud:', error);
-                });
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la solicitud: ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Respuesta recibida:', data);
+                    })
+                    .catch(error => {
+                        console.error('Hubo un problema con la solicitud:', error);
+                    });
             },
 
 
@@ -279,7 +279,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             setToken: (token) => {
                 setStore({ token });
-            }
+            },
+
+
+            deleteUser: async (id) => {
+
+                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                    method: "DELETE",
+                })
+                if (!res.ok) {
+                    alert("no se puede eliminar");
+                } else {
+                    getContacts();
+                }
+            },
+
+            putUser: async (email, password, name, lastname, role) => {
+                const actions = getActions();
+                const store = getStore();
+
+                const response = await fetch(process.env.BACKEND_URL + `${store.contactToEdit.id}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        "email": email,
+                        "password": password,
+                        "name": name,
+                        "lastname": lastname,
+                        "role": role
+
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.ok) {
+                    alert("contacto actualizado correctamente")
+                    actions.getContacts();
+                } else {
+                    alert("no se puede actualizar");
+                }
+            },
+
+
+
+
+
+
+
         }
     };
 };

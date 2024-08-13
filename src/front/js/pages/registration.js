@@ -11,18 +11,25 @@ export const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [adress, setAdress] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [role, setRole] = useState('');
     // const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        const logged = await actions.login(email, password)
+        const createUser = await actions.createUser(email, password, name, lastname)
 
         if (logged) {
             navigate("/home");
         }
     }
+    useEffect(() => {
+
+        actions.createUser()
+
+    }, []);
+
+
 
     return (
         <div className="login-container">
@@ -46,7 +53,7 @@ export const Registration = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="email">Full Name:</label>
+                    <label htmlFor="name">Name:</label>
                     <input
                         type="text"
                         id="name"
@@ -55,21 +62,21 @@ export const Registration = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="password">Phone Number:</label>
+                    <label htmlFor="lastname">Lastname:</label>
                     <input
-                        type="number"
-                        id="phone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        type="text"
+                        id="lastname"
+                        value={lastname}
+                        onChange={(e) => setLastName(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label htmlFor="password">Adress:</label>
+                    <label htmlFor="role">Role:</label>
                     <input
                         type="text"
-                        id="adress"
-                        value={adress}
-                        onChange={(e) => setAdress(e.target.value)}
+                        id="role"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                     />
                 </div>
                 <button type="submit">Registrarse</button>
