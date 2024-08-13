@@ -282,23 +282,311 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            deleteUser: async (id) => {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Aquí empiezan los DELETE
+            deleteUser: async (id) => {
+                const actions = getActions();
                 const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
                     method: "DELETE",
                 })
                 if (!res.ok) {
                     alert("no se puede eliminar");
                 } else {
-                    getContacts();
+                    actions.getUsers();
                 }
             },
 
-            putUser: async (email, password, name, lastname, role) => {
+            deleteCourse: async (id) => {
                 const actions = getActions();
-                const store = getStore();
+                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                    method: "DELETE",
+                })
+                if (!res.ok) {
+                    alert("no se puede eliminar");
+                } else {
+                    actions.getUsers();
+                }
+            },
 
-                const response = await fetch(process.env.BACKEND_URL + `${store.contactToEdit.id}`, {
+            deleteLesson: async (id) => {
+                const actions = getActions();
+                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                    method: "DELETE",
+                })
+                if (!res.ok) {
+                    alert("no se puede eliminar");
+                } else {
+                    actions.getUsers();
+                }
+            },
+
+            deleteOrder: async (id) => {
+                const actions = getActions();
+                const res = await fetch(process.env.BACKEND_URL + `/api/user/${id}`, {
+                    method: "DELETE",
+                })
+                if (!res.ok) {
+                    alert("no se puede eliminar");
+                } else {
+                    actions.getUsers();
+                }
+            },
+
+            deleteOrderItem: async (id) => {
+                const actions = getActions();
+                const res = await fetch(process.env.BACKEND_URL + `/api/order_item/${id}`, {
+                    method: "DELETE",
+                })
+                if (!res.ok) {
+                    alert("no se puede eliminar");
+                } else {
+                    actions.getUsers();
+                }
+            },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Aquí empiezan los PUT
+            putUser: async (id, email, password, name, lastname, role) => {
+
+                // const store = getStore();
+
+                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
                     method: "PUT",
                     body: JSON.stringify({
                         "email": email,
@@ -313,8 +601,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 })
                 if (response.ok) {
-                    alert("contacto actualizado correctamente")
-                    actions.getContacts();
+                    alert("usuario actualizado correctamente")
+                    getContacts();
                 } else {
                     alert("no se puede actualizar");
                 }
