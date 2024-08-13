@@ -2,11 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import logo from '../../img/Untitled_design-removebg-preview.png';
+import Php from '../../img/PHP-removebg-preview.png';
+import React2 from '../../img/Untitled_design-removebg-preview.png';
+import Sql from '../../img/Untitled_design-removebg-preview.png';
+import Astro from '../../img/Astro_Logo_PNG_Vector__SVG__Free_Download-removebg-preview.png';
+import Python from '../../img/Python_logo-removebg-preview.png';
 import bgVideo from '../../videos/133C.gif';
 import { Link } from "react-router-dom";
-
-
-
 
 
 export const Courses = () => {
@@ -63,22 +65,17 @@ export const Courses = () => {
 		);
 	});
 
-
-
 	return (
 		<div className=" text-center mt-5">
-
 
 			<h1 className="counter" >Ofertas en nuestros cursos hasta :</h1>
 			<div className="time">
 				{timerComponents.length ? timerComponents : <span>¡Tiempo completado!</span>}
 			</div>
 
-
 			<img src={bgVideo} className="background-home d-flex justify-content-center" />
 
 			<div className="row">
-
 
 				<div className="card mx-5 col-3">
 					<img src={logo} className="card-img-top img-fluid d-flex justify-content-center" alt="..." />
@@ -101,7 +98,7 @@ export const Courses = () => {
 
 
 				<div className="card mx-5 col-3">
-					<img src={logo} className="card-img-top img-fluid d-flex justify-content-center" alt="..." />
+					<img src={Python} width={100} height={50} className="card-img-top img-fluid d-flex justify-content-center" alt="..." />
 					<div className="card-body">
 						<h5 className="card-title">Python Revolution</h5>
 						<p className="card-text">14 clases.</p>
@@ -158,10 +155,6 @@ export const Courses = () => {
 				</div>
 
 			</div>
-
-
-
-
 
 			<div className="row">
 
@@ -242,14 +235,7 @@ export const Courses = () => {
 
 			</div>
 
-
-
-
-
 			<div className="row">
-
-
-
 				<div className="card mx-5 col-3">
 					<img src={logo} className="card-img-top img-fluid d-flex justify-content-center" alt="..." />
 					<div className="card-body">
@@ -306,7 +292,6 @@ export const Courses = () => {
 					</div>
 				</div>
 
-
 				<div className="card mx-5 col-3">
 					<img src={logo} className="card-img-top img-fluid d-flex justify-content-center" alt="..." />
 					<div className="card-body">
@@ -324,9 +309,7 @@ export const Courses = () => {
 						</div>
 					</div>
 				</div>
-
 			</div>
-
 		</div>
 	);
 };
