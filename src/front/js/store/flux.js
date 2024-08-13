@@ -96,8 +96,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-
-
             getLesson: async () => {
                 // const store=getStore()
                 const res = await fetch(process.env.BACKEND_URL + "/api/lessons", {
@@ -111,6 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ lessons: data })
                 console.log(data)
             },
+
 
             createLesson: (url_video, category, title, description, author, user_id, course_id) => {
                 fetch(process.env.BACKEND_URL + "/api/lesson", {
@@ -155,6 +154,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ courses: data })
                 console.log(data)
             },
+            
 
             createCourse: (name, description, price) => {
                 fetch(process.env.BACKEND_URL + "/api/course", {
@@ -319,11 +319,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("no se puede actualizar");
                 }
             },
-
-
-
-
-
 
 
         }
