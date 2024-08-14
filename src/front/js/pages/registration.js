@@ -15,12 +15,12 @@ export const Registration = () => {
     const [role, setRole] = useState('');
     // const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleRegistrer = async (e) => {
         e.preventDefault()
-        const createUser = await actions.createUser(email, password, name, lastname,role)
+        const createUser = await actions.createUser(email, password, name, lastname, role)
 
-        if (logged) {
-            navigate("/home");
+        if (!!createUser.access_token) {
+            navigate("/student");
         }
     }
     useEffect(() => {
@@ -33,7 +33,7 @@ export const Registration = () => {
 
     return (
         <div className="login-container">
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleRegistrer}>
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
