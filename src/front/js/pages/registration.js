@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 
 import { Context } from "../store/appContext";
+import { Login } from "./login";
 
 export const Registration = () => {
     const { store, actions } = useContext(Context);
@@ -15,25 +16,20 @@ export const Registration = () => {
     const [role, setRole] = useState('');
     // const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault()
-        const createUser = await actions.createUser(email, password, name, lastname,role)
+        const createUser = await actions.createUser(email, password, name, lastname, role)
+        if (!!createUser.access_token) {
+            navigate("/Student"); // Redirige a la pagina student si el inicio de sesión es exitoso
+        } else {
 
-        if (logged) {
-            navigate("/home");
         }
     }
-    useEffect(() => {
-
-        actions.createUser()
-
-    }, []);
-
 
 
     return (
         <div className="login-container">
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleRegister}>
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input

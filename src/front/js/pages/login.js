@@ -12,7 +12,7 @@ export const Login = () => {
 		const logged = await actions.login(email, password);
 
 		if (logged) {
-			navigate("/student"); // Redirige al home si el inicio de sesión es exitoso
+			navigate("/student"); // Redirige a la pagina  si el inicio de sesión es exitoso
 		} else {
 			// Aquí podrías manejar errores, por ejemplo, mostrando un mensaje al usuario
 			alert("Login failed. Please check your credentials.");
