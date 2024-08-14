@@ -100,6 +100,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         return response.json();
                     })
                     .then(data => {
+                        localStorage.setItem("jwt-token", data.access_token);
+                        setStore({ token: data.access_token });
                         console.log('Respuesta recibida:', data);
                     })
                     .catch(error => {
@@ -195,7 +197,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ courses: data })
                 console.log(data)
             },
-            
+
 
             createCourse: (name, description, price) => {
                 fetch(process.env.BACKEND_URL + "/api/course", {
@@ -420,11 +422,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
                     method: "PUT",
                     body: JSON.stringify({
-                        "email": email,
-                        "password": password,
-                        "name": name,
-                        "lastname": lastname,
-                        "role": role
+                        email: email,
+                        password: password,
+                        name: name,
+                        lastname: lastname,
+                        role: role
 
                     }),
                     headers: {
@@ -433,12 +435,113 @@ const getState = ({ getStore, getActions, setStore }) => {
                 })
                 if (response.ok) {
                     alert("usuario actualizado correctamente")
-                    getContacts();
+                    getUser();
                 } else {
                     alert("no se puede actualizar");
                 }
             },
 
+
+
+            putLesson: async (id, url_video, category, title, description, author) => {
+
+                // const store = getStore();
+
+                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        url_video: url_video,
+                        category: category,
+                        title: title,
+                        description: description,
+                        author: author
+
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.ok) {
+                    alert("usuario actualizado correctamente")
+                    getUser();
+                } else {
+                    alert("no se puede actualizar");
+                }
+            },
+
+
+            putCourse: async (id, name, description, price) => {
+
+                // const store = getStore();
+
+                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        name: name,
+                        lastname: description,
+                        price: price
+
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.ok) {
+                    alert("usuario actualizado correctamente")
+                    getUser();
+                } else {
+                    alert("no se puede actualizar");
+                }
+            },
+
+
+            putOrder: async (id, methods_payment, payment_date, total, status) => {
+
+                // const store = getStore();
+
+                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        methods_payment: methods_payment,
+                        payment_date: payment_date,
+                        total: total,
+                        status: status,
+
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.ok) {
+                    alert("usuario actualizado correctamente")
+                    getUser();
+                } else {
+                    alert("no se puede actualizar");
+                }
+            },
+
+
+            putOrderItem: async (id, quantity) => {
+
+                // const store = getStore();
+
+                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        "quantity ": quantity
+
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.ok) {
+                    alert("usuario actualizado correctamente")
+                    getUser();
+                } else {
+                    alert("no se puede actualizar");
+                }
+            },
 
         }
     };
