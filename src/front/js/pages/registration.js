@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 import { Context } from "../store/appContext";
 
-
 export const Registration = () => {
     const { store, actions } = useContext(Context);
-    const navigate = useNavigate();
 
     // const {actions} = useContext(Context)
     const [email, setEmail] = useState('');
@@ -17,19 +15,19 @@ export const Registration = () => {
     const [role, setRole] = useState('');
     // const navigate = useNavigate();
 
-    const handleRegister = async (e) => {
+    const handleRegistrer = async (e) => {
         e.preventDefault()
         const createUser = await actions.createUser(email, password, name, lastname, role)
+
         if (!!createUser.access_token) {
-            navigate("/"); // Redirige a la pagina student si el inicio de sesión es exitoso
-        } else {
+            navigate("/student");
         }
     }
 
 
     return (
         <div className="login-container">
-            <form onSubmit={handleRegister}>
+            <form onSubmit={handleRegistrer}>
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
@@ -81,5 +79,4 @@ export const Registration = () => {
         </div>
     );
 };
-
 
