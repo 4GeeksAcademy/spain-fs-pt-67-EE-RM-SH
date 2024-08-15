@@ -13,10 +13,6 @@ CORS(api)
 current_user = User.name
 
 
-# jwt_redis_blocklist = redis.StrictRedis(
-#     host="localhost", port=6379, db=0, decode_responses=True
-# )
-
 @api.route("/hello", methods=["POST", "GET"])
 def handle_hello():
     response_body = {
@@ -57,16 +53,15 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-
 @api.route("/logout", methods=["DELETE"])
-@jwt_required(verify_type=False)
 def logout():
-    token = get_jwt()
-    jti = token["jti"]
-    ttype = token["type"]
-    # jwt_redis_blocklist.set(jti, "")
-
-    return jsonify(msg=f"{ttype.capitalize()} token successfully revoked")
+    # Obtener el JWT del usuario
+    jti = get_jwt()["jti"]  # jti es el identificador del JWT
+    
+    # Añadir el jti a la blocklist
+    # jwt_redis_blocklist.set(jti, "", ex=timedelta(days=30)) # Ejemplo con Redis
+    
+    return jsonify(jti), 200
 
 
 # Protect a route with jwt_required, which will kick out requests
@@ -116,19 +111,25 @@ def delete_user(id):
     return "", 204
 
 @api.route("/courses", methods=["GET"])
+@jwt_required()
 def get_courses():
+   
     courses = Courses.query.all()
     return jsonify([course.serialize() for course in courses])
 
 @api.route("/course/<int:id>", methods=["GET"])
+@jwt_required()
 def get_course(id):
+    
     course = Courses.query.get(id)
     if not course:
         abort(404)
     return jsonify(course.serialize())
 
 @api.route('/course', methods=['POST'])
+@jwt_required()
 def create_course():
+   
     data = request.get_json()
     new_course = Courses(
         name=data['name'],
@@ -142,7 +143,9 @@ def create_course():
     return jsonify(new_course.serialize()), 201
 
 @api.route('/course/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_course(id):
+    
     course = Courses.query.get(id)
     if not course:
         abort(404)
@@ -157,6 +160,7 @@ def update_course(id):
     return jsonify(course.serialize())
 
 @api.route('/course/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_course(id):
     course = Courses.query.get(id)
     if not course:
@@ -224,11 +228,13 @@ def delete_lesson(id):
     return '', 204
 
 @api.route('/orders', methods=['GET'])
+@jwt_required()
 def get_orders():
     orders = Orders.query.all()
     return jsonify([order.serialize() for order in orders])
 
 @api.route('/order/<int:id>', methods=['GET'])
+@jwt_required()
 def get_order(id):
     order = Orders.query.get(id)
     if not order:
@@ -236,6 +242,7 @@ def get_order(id):
     return jsonify(order.serialize())
 
 @api.route('/order', methods=['POST'])
+@jwt_required()
 def create_order():
     data = request.get_json()
     new_order = Orders(
@@ -250,6 +257,7 @@ def create_order():
     return jsonify(new_order.serialize()), 201
 
 @api.route('/order/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_order(id):
     order = Orders.query.get(id)
     if not order:
@@ -264,6 +272,7 @@ def update_order(id):
     return jsonify(order.serialize())
 
 @api.route('/order/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_order(id):
     order = Orders.query.get(id)
     if not order:
@@ -273,11 +282,13 @@ def delete_order(id):
     return '', 204
 
 @api.route('/order_items', methods=['GET'])
+@jwt_required()
 def get_order_items():
     order_items = Order_item.query.all()
     return jsonify([order_item.serialize() for order_item in order_items])
 
 @api.route('/order_item/<int:id>', methods=['GET'])
+@jwt_required()
 def get_order_item(id):
     order_item = Order_item.query.get(id)
     if not order_item:
@@ -285,6 +296,7 @@ def get_order_item(id):
     return jsonify(order_item.serialize())
 
 @api.route('/order_item', methods=['POST'])
+@jwt_required()
 def create_order_item():
     data = request.get_json()
     new_order_item = Order_item(
@@ -297,6 +309,7 @@ def create_order_item():
     return jsonify(new_order_item.serialize()), 201
 
 @api.route('/order_item/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_order_item(id):
     order_item = Order_item.query.get(id)
     if not order_item:
@@ -309,6 +322,7 @@ def update_order_item(id):
     return jsonify(order_item.serialize())
 
 @api.route('/order_item/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_order_item(id):
     order_item = Order_item.query.get(id)
     if not order_item:
@@ -316,3 +330,19 @@ def delete_order_item(id):
     db.session.delete(order_item)
     db.session.commit()
     return '', 204
+
+
+@api.route("/", methods=["GET"])
+def home():
+    response_body = {
+        "message": "Bienvenido a la página principal"
+    }
+    return jsonify(response_body), 200
+
+@api.route("/blog", methods=["GET"])
+def blog():
+    response_body = {
+        "message": "Bienvenido al blog"
+    }
+    return jsonify(response_body), 200
+
