@@ -12,50 +12,39 @@ export const Login = () => {
 		const logged = await actions.login(email, password);
 
 		if (logged) {
-			navigate("/student"); // Redirige a la pagina  si el inicio de sesión es exitoso
+			navigate("/"); // Redirige al home si el inicio de sesión es exitoso
 		} else {
 			// Aquí podrías manejar errores, por ejemplo, mostrando un mensaje al usuario
 			alert("Login failed. Please check your credentials.");
 		}
 	};
 
-	const handleLogout = () => {
-		actions.logout();
-		navigate("/");  // Redirigir al usuario después de cerrar sesión
-	};
-
 	return (
 		<div className="login-container">
-			{!store.token ? (
+			<div>
 				<div>
-					<div>
-						<label htmlFor="email">Email:</label>
-						<input
-							type="text"
-							id="email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</div>
-					<div>
-						<label htmlFor="password">Password:</label>
-						<input
-							type="password"
-							id="password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</div>
-					<Link className="registro" to="/registration">
-						<button>Registering</button>
-					</Link>
-					<button onClick={handleLogin}><h3>Login</h3></button>
+					<label htmlFor="email">Email:</label>
+					<input
+						type="text"
+						id="email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
 				</div>
-			) : (
-				<button onClick={handleLogout}><h3>Logout</h3></button>
-			)}
+				<div>
+					<label htmlFor="password">Password:</label>
+					<input
+						type="password"
+						id="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+				</div>
+				<Link className="registro" to="/registration">
+					<button>Registering</button>
+				</Link>
+				<button onClick={handleLogin}><h3>Login</h3></button>
+			</div>
 		</div>
 	);
 };
-
-

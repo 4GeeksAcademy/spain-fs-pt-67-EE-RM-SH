@@ -9,7 +9,7 @@ export const Student = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        actions.getLesson()
+        actions.getLessons()
     }, []);
 
     return (
@@ -17,7 +17,7 @@ export const Student = () => {
             <h1>Está es la página de estudiantes</h1>
 
 
-            <div  width="500"  className="accordion" id="accordionExample">
+            <div width="500" className="accordion" id="accordionExample">
 
                 <div className="accordion-item">
                     <h2 className="accordion-header">
@@ -28,17 +28,6 @@ export const Student = () => {
                     <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
 
-
-
-
-
-
-
-
-
-
-
-                            
                             <div className="row ">
 
                                 <iframe className="col-3 p-3" width="400" height="315" src="https://www.youtube.com/embed/Kp4Mvapo5kc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -49,7 +38,6 @@ export const Student = () => {
                                 <iframe className="col-3 p-3" width="560" height="315" src="https://www.youtube.com/embed/nKPbfIU442g?si=HkehGGQL3-K0zZAX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
                             </div>
-
 
                         </div>
                     </div>

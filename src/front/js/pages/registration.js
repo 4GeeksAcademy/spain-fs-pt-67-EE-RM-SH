@@ -27,6 +27,8 @@ export const Registration = () => {
     }
 
 
+
+
     return (
         <div className="login-container">
             <form onSubmit={handleRegister}>
