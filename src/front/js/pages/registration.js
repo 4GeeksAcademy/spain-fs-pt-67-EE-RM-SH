@@ -23,11 +23,7 @@ export const Registration = () => {
             navigate("/student");
         }
     }
-    useEffect(() => {
 
-        actions.createUser()
-
-    }, []);
 
 
 

@@ -133,6 +133,8 @@ def create_course():
     new_course = Courses(
         name=data['name'],
         description=data['description'],
+        clases=data['clases'],
+        price_original=data['price_original'],
         price=data['price']
     )
     db.session.add(new_course)
@@ -147,7 +149,10 @@ def update_course(id):
     data = request.get_json()
     course.name = data['name']
     course.description = data['description']
+    course.clases = data['clases']
+    course.price_original = data['price_original']
     course.price = data['price']
+    
     db.session.commit()
     return jsonify(course.serialize())
 

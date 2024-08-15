@@ -338,10 +338,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            addCourse: async (id, name) => {
-                const { addCourses } = getStore()
-                setStore({ addCourses: [...addCourses, { id, name }] })
-            },
 
             logout: () => {
                 localStorage.removeItem("jwt-token");
@@ -447,7 +443,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                 // const store = getStore();
 
-                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                const response = await fetch(process.env.BACKEND_URL + `api/lesson${id}`, {
                     method: "PUT",
                     body: JSON.stringify({
                         url_video: url_video,
@@ -470,16 +466,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            putCourse: async (id, name, description, price) => {
+            putCourse: async (id, name, description, price, clases, price_original) => {
 
                 // const store = getStore();
 
-                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                const response = await fetch(process.env.BACKEND_URL + `api/course${id}`, {
                     method: "PUT",
                     body: JSON.stringify({
                         name: name,
-                        lastname: description,
-                        price: price
+                        description: description,
+                        price: price,
+                        clases: clases,
+                        price_original: price_original
 
                     }),
                     headers: {
@@ -499,7 +497,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                 // const store = getStore();
 
-                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                const response = await fetch(process.env.BACKEND_URL + `api/order${id}`, {
                     method: "PUT",
                     body: JSON.stringify({
                         methods_payment: methods_payment,
@@ -525,7 +523,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                 // const store = getStore();
 
-                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                const response = await fetch(process.env.BACKEND_URL + `api/order_item${id}`, {
                     method: "PUT",
                     body: JSON.stringify({
                         "quantity ": quantity
@@ -542,6 +540,51 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("no se puede actualizar");
                 }
             },
+
+            // addCourses: async (id, name, price) => {
+            //     const { addCourses } = getStore()
+            //     setStore({ addCourses: [...addCourses, { id, name, price }] })
+            // },
+
+            // addCourses: (element) => {
+            // 	const store = getStore();
+            // 	const { favorites } = store
+            // 	const isFavorite = favorites.filter(item => item.properties.name == element.properties.name);
+            // 	console.log(favorites)
+
+            // 	if (isFavorite.length == 0) {
+            // 		setStore({
+            // 			favorites: [...favorites, element]
+            // 		})
+            // 	} else {
+            // 		console.log("ya existe")
+            // 	}
+            // },
+
+            addCourses: (curso) => {
+                const store = getStore();
+                // Verificar si el curso ya está en el carrito
+                const isCourseInCart = store.addCourses.some(item => item.id === curso.id);
+
+                if (!isCourseInCart) {
+                    // Si no está en el carrito, añadir el curso
+                    setStore({ addCourses: [...store.addCourses, curso] });
+                } else {
+                    // Si ya está en el carrito, no hacer nada (opcional: podrías mostrar un mensaje al usuario aquí)
+                    console.log('El curso ya está en el carrito.');
+                }
+            },
+
+
+            removeCourse: (courseId) => {
+                const store = getStore();
+                // Filtrar el array de cursos para eliminar el curso con el ID especificado
+                const updatedCourses = store.addCourses.filter(course => course.id !== courseId);
+                // Actualizar el estado con el array filtrado
+                setStore({ addCourses: updatedCourses });
+            },
+
+
 
         }
     };
