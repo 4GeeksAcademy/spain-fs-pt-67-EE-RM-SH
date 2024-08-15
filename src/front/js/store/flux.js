@@ -41,7 +41,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.ok) {
                         localStorage.setItem("jwt-token", data.access_token);
                         setStore({ token: data.access_token });
-                        return true;
+                        return true
+                           
                     } else {
                         console.log("Login failed:", data.message);
                         return false;
@@ -51,6 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return false;
                 }
             },
+
 
             getUsers: async () => {
                 // const store=getStore()
@@ -172,17 +174,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
             getCourses: async () => {
-                // const store=getStore()
-                const res = await fetch(process.env.BACKEND_URL + "/api/courses", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
+                const token = localStorage.getItem("jwt-token"); // Obtener el token del localStorage
+            
+                if (!token) {
+                    console.error("No token found, cannot fetch courses.");
+                    return;
+                }
+            
+                try {
+                    const res = await fetch(`${process.env.BACKEND_URL}/api/courses`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}` // Incluir el token en el encabezado
+                        }
+                    });
+            
+                    if (res.ok) {
+                        const data = await res.json();
+                        setStore({ courses: data }); // Guardar los cursos en el store
+                        console.log(data);
+                    } else {
+                        console.error("Failed to fetch courses:", res.statusText);
+                        // Manejo adicional dependiendo del código de estado
                     }
-                })
-                const data = await res.json()
-                setStore({ courses: data })
-                console.log(data)
+                } catch (error) {
+                    console.error("An error occurred while fetching courses:", error);
+                }
             },
+            
 
 
             getCourse: async (id) => {
@@ -408,6 +428,33 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getUsers();
                 }
             },
+
+
+
+            handleLogout: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+
+                    const response = await fetch(process.env.BACKEND_URL + "/api/logout", {
+                        method: "DELETE",
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Eliminar el token del localStorage
+                        localStorage.removeItem("token");
+                        alert("Sesión cerrada con éxito");
+                    } else {
+                        alert("Error al cerrar sesión. Inténtalo de nuevo.");
+                    }
+                } catch (error) {
+                    console.error("Error al cerrar sesión:", error);
+                    alert("Ocurrió un error. Inténtalo de nuevo.");
+                }
+            },
+
 
 
             // Aquí empiezan los PUT

@@ -348,7 +348,13 @@
 
   .carrito{
     background-color: transparent;
+    color: #0e851e;
     border: none;
+  }
+
+  .carrito:hover{
+    color: red;
+
   }
 
   .num-carrito{
@@ -362,3 +368,29 @@
     border-radius: 40px;
     border-color: rgb(160, 5, 5);
   }
+
+  .logout{
+    background-color: transparent;
+    text-decoration: none;
+    color: #198754;
+    border-style: none;
+  }
+
+  .logout:hover{
+    color: red;
+    transform: scale(1.1)
+  }
+
+.login{
+  background-color: transparent;
+  text-decoration: none;
+  color: #198754;
+  border-style: none;
+}
+
+  .login:hover{
+    color:blue;
+    transform: scale(1.1)
+  }
+
+  

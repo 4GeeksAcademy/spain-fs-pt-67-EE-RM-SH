@@ -89,12 +89,12 @@ export const Home = () => {
             </div>
 
 
-
+{/* 
 
             <Link to="/student">
 
                 <button><h3>student</h3></button>
-            </Link>
+            </Link> */}
         </div>
     );
 };

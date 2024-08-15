@@ -78,7 +78,7 @@ export const Courses = () => {
 							/>
 							<div className="card-body">
 								<h5 className="card-title">{item.name}</h5>
-								<p className="card-text">{item.descriptions}</p>
+								<p className="card-text">{item.description}</p>
 								<p className="card-text">{item.clases}</p>
 								<p className="card-cost1">${item.price_original}</p>
 								<p className="card-cost2">${item.price}</p>
@@ -86,25 +86,24 @@ export const Courses = () => {
 									<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
 								</div>
 								<div>
-									<a
+									<button
 										onClick={() => actions.addCourses({
 											id: item.id,
 											name: item.name,
 											description: item.description,
 											price: item.price
 										})}
-										href="#"
 										className="btn1 m-3"
 									>
-										Añadir al carrito <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i>
-									</a>
+										Añadir al <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i>
+									</button>
 								</div>
 								<div>
 									<button
 										onClick={() => actions.removeCourse(item.id)}
 										className="btn3 m-3"
 									>
-										Eliminar del carrito
+										Eliminar del <i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "white" }}></i>
 									</button>
 								</div>
 							</div>
