@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 import { Context } from "../store/appContext";
-import { Login } from "./login";
+
 
 export const Registration = () => {
     const { store, actions } = useContext(Context);
@@ -21,13 +21,10 @@ export const Registration = () => {
         e.preventDefault()
         const createUser = await actions.createUser(email, password, name, lastname, role)
         if (!!createUser.access_token) {
-            Navigate("/"); // Redirige a la pagina home si el inicio de sesión es exitoso
+            navigate("/"); // Redirige a la pagina student si el inicio de sesión es exitoso
         } else {
-
         }
     }
-
-
 
 
     return (
