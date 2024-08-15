@@ -42,7 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         localStorage.setItem("jwt-token", data.access_token);
                         setStore({ token: data.access_token });
                         return true
-                           
+
                     } else {
                         console.log("Login failed:", data.message);
                         return false;
@@ -82,10 +82,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             createUser: async (email, password, name, lastname, role) => {
                 try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/registration", {
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/registration`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json'  // Indica que el cuerpo de la solicitud es JSON
                         },
                         body: JSON.stringify({
                             email: email,
@@ -93,27 +93,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                             name: name,
                             lastname: lastname,
                             role: role
-                        })
+                        })  // Convierte el cuerpo de la solicitud a una cadena JSON
                     });
-            
+
                     if (!response.ok) {
+                        // Lanza un error si la respuesta no es exitosa
                         throw new Error('Error en la solicitud: ' + response.statusText);
                     }
-            
-                    const data = await response.json();
-            
-                    if (data.access_token) {
-                        localStorage.setItem("jwt-token", data.access_token);
-                        setStore({ token: data.access_token });
-                        console.log('Respuesta recibida:', data);
-                    } else {
-                        throw new Error('El token de acceso no está presente en la respuesta');
-                    }
+
+                    const data = await response.json();  // Convierte la respuesta a JSON
+                    console.log('Respuesta recibida:', data);  // Imprime la respuesta en la consola
+
+                    // Aquí puedes manejar el `data` como desees, por ejemplo, guardar el token en localStorage
+                    localStorage.setItem("jwt-token", data.access_token);
+
+                    // Actualiza el estado si estás usando un contexto o una librería de manejo de estado
+                    setStore({ token: data.access_token });
+
                 } catch (error) {
+                    // Maneja cualquier error que ocurra durante la solicitud
                     console.error('Hubo un problema con la solicitud:', error);
                 }
             },
-            
+
 
 
             getLesson: async () => {
@@ -178,12 +180,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getCourses: async () => {
                 const token = localStorage.getItem("jwt-token"); // Obtener el token del localStorage
-            
+
                 if (!token) {
                     console.error("No token found, cannot fetch courses.");
                     return;
                 }
-            
+
                 try {
                     const res = await fetch(`${process.env.BACKEND_URL}/api/courses`, {
                         method: "GET",
@@ -192,7 +194,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Authorization": `Bearer ${token}` // Incluir el token en el encabezado
                         }
                     });
-            
+
                     if (res.ok) {
                         const data = await res.json();
                         setStore({ courses: data }); // Guardar los cursos en el store
@@ -205,7 +207,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("An error occurred while fetching courses:", error);
                 }
             },
-            
+
 
 
             getCourse: async (id) => {

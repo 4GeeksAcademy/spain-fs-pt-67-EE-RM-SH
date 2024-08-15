@@ -20,7 +20,7 @@ export const Registration = () => {
         e.preventDefault()
         const createUser = await actions.createUser(email, password, name, lastname, role)
         if (!!createUser.access_token) {
-            Navigate("/student"); // Redirige a la pagina student si el inicio de sesión es exitoso
+            Navigate("/"); // Redirige a la pagina home si el inicio de sesión es exitoso
         } else {
 
         }
