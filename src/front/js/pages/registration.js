@@ -1,27 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 import { Context } from "../store/appContext";
-import { Login } from "./login";
 
 export const Registration = () => {
     const { store, actions } = useContext(Context);
 
-    // const {actions} = useContext(Context)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [lastname, setLastName] = useState('');
     const [role, setRole] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault()
         const createUser = await actions.createUser(email, password, name, lastname, role)
-        if (!!createUser.access_token) {
-            Navigate("/"); // Redirige a la pagina home si el inicio de sesión es exitoso
+        if (createUser.access_token) {
+            navigate("/"); // Redirige a la pagina student si el inicio de sesión es exitoso
         } else {
+            alert("Login failed. Please check your credentials.");
 
         }
     }
