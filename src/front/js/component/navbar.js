@@ -1,9 +1,13 @@
-import React from "react";
+
 import { Link } from "react-router-dom"
 import bgVideo from '../../videos/133C.gif';
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
 	return (
+
 
 		<nav className="navbar navbar-expand-lg p-0">
 			<div className="container-fluid">
@@ -34,28 +38,18 @@ export const Navbar = () => {
 						</li>
 
 						<div className="dropdown">
-							<a
-								className="btn dropdown-toggle-split fw-bold s"
-								href="#"
-								role="button"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
+							<Link to="/payment"> <button className="carrito" role="button">
+								<span className="num-carrito position-absolute top-0 start-100 translate-middle badge rounded-pill">
+									{store.addCourses.length}
+								</span>
+
 								<i className="fa-solid fa-cart-shopping fa-lg" style={{ color: "#008a22" }}></i>
-							</a>
-							<ul className="dropdown-menu dropdown-menu-end">
-								<li className="container-name">
-									<button className="delete"><i className="fa-solid fa-trash-can fa-2xl"></i></button>
-								</li>
-							</ul>
+							</button>
+							</Link>
+
 						</div>
 
 
-						{/* <li className="nav-item">
-							<Link to="/payment" className="nav-link text-success" href="#" role="button" aria-expanded="false">
-								
-							</Link>
-						</li> */}
 					</ul>
 
 				</div>

@@ -194,6 +194,48 @@
   }
 
 
+  .btn3 {
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+    text-shadow: 0 1px 0 hsla(0, 0%, 0%, 0.2);
+    text-decoration: none !important;
+    text-transform: uppercase;
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 3px;
+    position: relative;
+    display: inline-block;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s;
+  }
+  
+  .btn3:active {
+    -webkit-transform: translateY(7px);
+    -moz-transform: translateY(7px);
+    -o-transform: translateY(7px);
+    transform: translateY(7px);
+  }
+  
+  .btn3 {
+    background: #a11111;
+    box-shadow: 0 10px 0 #580000,
+      0 11px 5px hsla(0, 0%, 0%, 0.5);
+  }
+
+  .btn3:hover {
+    background: #850e0e;
+  }
+  
+  .btn3:active {
+    box-shadow: 0 3px 0 #580000,
+      0 4px 6px hsla(0, 0%, 0%, 0.7);
+  }
+
+
+
   .form-payment{
     display: flex;
     justify-content: center;
@@ -301,4 +343,22 @@
   .dropdown-menu-end{
     background-color: #0e851e;
     color:white;
+  }
+
+
+  .carrito{
+    background-color: transparent;
+    border: none;
+  }
+
+  .num-carrito{
+    font-size: 14px;
+    background-color: transparent;
+    color: rgb(255, 0, 0);
+    border: solid ;
+    border-width: 2px 2px;
+    border-left: transparent;
+    border-bottom: transparent;
+    border-radius: 40px;
+    border-color: rgb(160, 5, 5);
   }

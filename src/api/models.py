@@ -36,6 +36,8 @@ class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.String(120), unique=True, nullable=False)
+    clases = db.Column(db.String(120), unique= False, nullable=False)
+    price_original = db.Column(db.String(120), unique= False, nullable=False)
     price = db.Column(db.String(120), unique=False, nullable=False)
 
     def serialize(self):
@@ -44,6 +46,8 @@ class Courses(db.Model):
             "id": self.id,
             "name": self.name,
             "description": self.description,
+            "clases": self.clases,
+            "price_original": self.price_original,
             "price": self.price
         }
 
