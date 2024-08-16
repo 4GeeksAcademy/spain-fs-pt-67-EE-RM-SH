@@ -27,6 +27,43 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ demo });
             },
 
+            createUser: async (email, password, name, lastname, role) => {
+                try {
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/registration`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'  // Indica que el cuerpo de la solicitud es JSON
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password,
+                            name: name,
+                            lastname: lastname,
+                            role: role
+                        })  // Convierte el cuerpo de la solicitud a una cadena JSON
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+
+                        console.log('Respuesta recibida:', data);
+                        localStorage.setItem("jwt-token", data.access_token);
+                        setStore({ token: data.access_token });
+                        return true;
+                    }
+
+                    else {
+                        console.log("Login failed:", data.message);
+                        return false;
+                    }
+                } catch (e) {
+                    console.log("Error durante el registro:", e);
+                    return false;
+                }
+            },
+
+
             login: async (email, password) => {
                 try {
                     const response = await fetch(process.env.BACKEND_URL + "/api/login", {
@@ -38,6 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
                     const data = await response.json();
                     console.log(data)
+
                     if (response.ok) {
                         localStorage.setItem("jwt-token", data.access_token);
                         setStore({ token: data.access_token });
@@ -52,7 +90,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return false;
                 }
             },
-
 
             getUsers: async () => {
                 // const store=getStore()
@@ -79,56 +116,39 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log(data)
             },
 
-            createUser: async (email, password, name, lastname, role) => {
-                try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/registration`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'  // Indica que el cuerpo de la solicitud es JSON
-                        },
-                        body: JSON.stringify({
-                            email: email,
-                            password: password,
-                            name: name,
-                            lastname: lastname,
-                            role: role
-                        })  // Convierte el cuerpo de la solicitud a una cadena JSON
-                    });
 
-                    if (!response.ok) {
-                        // Lanza un error si la respuesta no es exitosa
-                        throw new Error('Error en la solicitud: ' + response.statusText);
-                    }
-
-                    const data = await response.json();  // Convierte la respuesta a JSON
-                    console.log('Respuesta recibida:', data);  // Imprime la respuesta en la consola
-
-                    // Aquí puedes manejar el `data` como desees, por ejemplo, guardar el token en localStorage
-                    localStorage.setItem("jwt-token", data.access_token);
-
-                    // Actualiza el estado si estás usando un contexto o una librería de manejo de estado
-                    setStore({ token: data.access_token });
-
-                } catch (error) {
-                    // Maneja cualquier error que ocurra durante la solicitud
-                    console.error('Hubo un problema con la solicitud:', error);
-                }
-            },
 
 
             getLessons: async () => {
-                // const store=getStore()
-                const res = await fetch(process.env.BACKEND_URL + "/api/lessons", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${store.token}`,
-                        "Content-Type": "application/json"
+                const token = localStorage.getItem("jwt-token"); // Obtener el token del localStorage
+
+                if (!token) {
+                    console.error("No token found, cannot fetch lessons.");
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`${process.env.BACKEND_URL}/api/lessons`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}` // Incluir el token en el encabezado
+                        }
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        setStore({ lessons: data }); // Guardar las lecciones en el store
+                        console.log(data);
+                    } else {
+                        console.log("Failed to fetch lessons:");
+                        // Manejo adicional dependiendo del código de estado
                     }
-                })
-                const data = await res.json()
-                setStore({ lessons: data })
-                console.log(data)
+                } catch (error) {
+                    console.error("An error occurred while fetching lessons:", error);
+                }
             },
+
 
 
             getLesson: async (id) => {

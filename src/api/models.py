@@ -59,6 +59,7 @@ class Lesson(db.Model):
     title = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.String(120), unique=True, nullable=False)
     author = db.Column(db.String(120), unique=False, nullable=False)
+    #id del profesor
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey(Courses.id), nullable=False)
    
@@ -78,7 +79,6 @@ class Lesson(db.Model):
 
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     methods_payment = db.Column(db.String(120), unique=False, nullable=False)
     payment_date = db.Column(db.String(120), unique=False, nullable=False)
     total = db.Column(db.String(120), unique=False, nullable=False)

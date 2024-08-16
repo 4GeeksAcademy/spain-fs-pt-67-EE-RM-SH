@@ -8,66 +8,62 @@ import { Context } from "../store/appContext";
 export const Student = () => {
     const { store, actions } = useContext(Context);
 
+
     useEffect(() => {
-        actions.getLessons()
-    }, []);
+        actions.getLessons(); // Llama a la acción para obtener lecciones
+    }, [actions]);
 
+    console.log(store.lessons)
     return (
+
+
         <div className="text-center">
-            <h1>Está es la página de estudiantes</h1>
+            <h1>Esta es la página de estudiantes</h1>
 
-
-            <div width="500" className="accordion" id="accordionExample">
-
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <img width="100" src={logo}  ></img>
-                        </button>
-                    </h2>
-                    <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-
-                            <div className="row ">
-
-                                <iframe className="col-3 p-3" width="400" height="315" src="https://www.youtube.com/embed/Kp4Mvapo5kc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-                                <iframe className="col-3 p-3" width="400" height="315" src="https://www.youtube.com/embed/IimBRwHhW54?si=3FEu0IYS02RbzC3Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-                                <iframe className="col-3 p-3" width="560" height="315" src="https://www.youtube.com/embed/nKPbfIU442g?si=HkehGGQL3-K0zZAX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+            <div className="accordion" id="accordionExample">
+                {store.lessons.map((lesson, index) => (
+                    <div className="accordion-item" key={index}>
+                        <h2 className="accordion-header">
+                            <button
+                                className={`accordion-button ${index === 0 ? '' : 'collapsed'}`}
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target={`#collapse${index}`}
+                                aria-expanded={index === 0}
+                                aria-controls={`collapse${index}`}
+                            >
+                                <img width="100" src={logo} alt="Logo" />
+                                {lesson.title}
+                            </button>
+                        </h2>
+                        <div
+                            id={`collapse${index}`}
+                            className={`accordion-collapse collapse ${index === 0 ? 'show' : ''}`}
+                            data-bs-parent="#accordionExample"
+                        >
+                            <div className="accordion-body">
+                                <div className="row">
+                                    <iframe
+                                        className="col-12 p-3"
+                                        width="560"
+                                        height="315"
+                                        src={lesson.url_video}
+                                        title={lesson.title}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerPolicy="strict-origin-when-cross-origin"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                                <p><strong>Categoria:</strong> {lesson.category}</p>
+                                <p><strong>Descripción:</strong> {lesson.description}</p>
+                                <p><strong>Autor:</strong> {lesson.author}</p>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            JAVASCRIPT REVOLUTION
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            REACT REVOLUTION
-                        </button>
-                    </h2>
-                    <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
+                ))}
             </div>
-
         </div>
     );
 };
+    

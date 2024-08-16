@@ -17,13 +17,15 @@ export const Registration = () => {
     const handleRegistrer = async (e) => {
         e.preventDefault()
         const createUser = await actions.createUser(email, password, name, lastname, role)
-        if (createUser) {
+        if (createUser.access_token) {
             navigate("/"); // Redirige a la pagina student si el inicio de sesión es exitoso
         } else {
             alert("Login failed. Please check your credentials.");
 
+            if (!!createUser.access_token) {
+                navigate("/student");
+            }
         }
-    };
 
 
         return (
@@ -78,5 +80,6 @@ export const Registration = () => {
                 </form>
 
             </div>
-        );   
+        );
+    };
 }

@@ -171,6 +171,7 @@ def delete_course(id):
 @api.route('/lessons', methods=['GET'])
 @jwt_required()
 def get_lessons():
+    print("hola")
     lessons = Lesson.query.all()
     return jsonify([lesson.serialize() for lesson in lessons])
 
