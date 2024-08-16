@@ -79,7 +79,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log(data)
             },
 
-
             createUser: async (email, password, name, lastname, role) => {
                 try {
                     const response = await fetch(`${process.env.BACKEND_URL}/api/registration`, {
@@ -117,8 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-
-            getLesson: async () => {
+            getLessons: async () => {
                 // const store=getStore()
                 const res = await fetch(process.env.BACKEND_URL + "/api/lessons", {
                     method: "GET",
@@ -148,33 +146,34 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            createLesson: async (url_video, category, title, description, author, user_id, course_id) => {
-                try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/lesson", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            url_video: url_video,
-                            category: category,
-                            title: title,
-                            description: description,
-                            author: author,
-                            user_id: user_id,
-                            course_id: course_id
-                        })
+            createLesson: (url_video, category, title, description, author, user_id, course_id) => {
+                fetch(process.env.BACKEND_URL + "/api/lesson", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        url_video: url_video,
+                        category: category,
+                        title: title,
+                        description: description,
+                        author: author,
+                        user_id: user_id,
+                        course_id: course_id
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la solicitud: ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Respuesta recibida:', data);
+                    })
+                    .catch(error => {
+                        console.error('Hubo un problema con la solicitud:', error);
                     });
-
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud: ' + response.statusText);
-                    }
-
-                    const data = await response.json();
-                    console.log('Respuesta recibida:', data);
-                } catch (error) {
-                    console.error('Hubo un problema con la solicitud:', error);
-                }
             },
 
 
@@ -224,31 +223,31 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            createCourse: async (name, description, price) => {
-                try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/course", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            name: name,
-                            description: description,
-                            price: price
-                        })
+            createCourse: (name, description, price) => {
+                fetch(process.env.BACKEND_URL + "/api/course", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        description: description,
+                        price: price
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la solicitud: ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Respuesta recibida:', data);
+                    })
+                    .catch(error => {
+                        console.error('Hubo un problema con la solicitud:', error);
                     });
-
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud: ' + response.statusText);
-                    }
-
-                    const data = await response.json();
-                    console.log('Respuesta recibida:', data);
-                } catch (error) {
-                    console.error('Hubo un problema con la solicitud:', error);
-                }
             },
-
 
 
 
@@ -280,33 +279,33 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            createOrders: async (user_id, methods_payment, payment_date, total, status) => {
-                try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/order", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            user_id: user_id,
-                            methods_payment: methods_payment,
-                            payment_date: payment_date,
-                            total: total,
-                            status: status
-                        })
+            crateOrders: (user_id, methods_payment, payment_date, total, status) => {
+                fetch(process.env.BACKEND_URL + "/api/order", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: user_id,
+                        methods_payment: methods_payment,
+                        payment_date: payment_date,
+                        total: total,
+                        status: status
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la solicitud: ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Respuesta recibida:', data);
+                    })
+                    .catch(error => {
+                        console.error('Hubo un problema con la solicitud:', error);
                     });
-
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud: ' + response.statusText);
-                    }
-
-                    const data = await response.json();
-                    console.log('Respuesta recibida:', data);
-                } catch (error) {
-                    console.error('Hubo un problema con la solicitud:', error);
-                }
             },
-
 
 
             getOrder_Items: async () => {
@@ -336,29 +335,30 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log(data)
             },
 
-            createOrder_Item: async (quantity, course_id, order_id) => {
-                try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/Order_Item", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            quantity: quantity,
-                            course_id: course_id,
-                            order_id: order_id
-                        })
+            createOrder_Item: (quantity, course_id, order_id) => {
+                fetch(process.env.BACKEND_URL + "/api/Order_Item", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        quantity: quantity,
+                        course_id: course_id,
+                        order_id: order_id
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la solicitud: ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Respuesta recibida:', data);
+                    })
+                    .catch(error => {
+                        console.error('Hubo un problema con la solicitud:', error);
                     });
-
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud: ' + response.statusText);
-                    }
-
-                    const data = await response.json();
-                    console.log('Respuesta recibida:', data);
-                } catch (error) {
-                    console.error('Hubo un problema con la solicitud:', error);
-                }
             },
 
 
