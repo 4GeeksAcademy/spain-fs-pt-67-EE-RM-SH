@@ -1,14 +1,9 @@
-
-import { Link, useNavigate } from "react-router-dom"
-import bgVideo from '../../videos/133C.gif';
-import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
-
-
-
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
@@ -16,22 +11,37 @@ export const Navbar = () => {
 		navigate("/login"); // Redirige al usuario a la página de inicio
 	};
 
-
-
 	return (
-
-
 		<nav className="navbar navbar-expand-lg p-0">
 			<div className="container-fluid">
 				<Link to="/" className="navbar-brand text-success custom-brand">
-					<img src="https://www.frikibunker.es/productos/imagenes/img_2268_e13b929bd6d29fce1e2db87430edb5c8_1.png" alt="Logo" width="60" height="" className="d-inline-block align-text-center" />
+					<img
+						src="https://www.frikibunker.es/productos/imagenes/img_2268_e13b929bd6d29fce1e2db87430edb5c8_1.png"
+						alt="Logo"
+						width="60"
+						height=""
+						className="d-inline-block align-text-center"
+					/>
 					CULTURE CODE ACADEMY
 				</Link>
-				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<button
+					className="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-4">
+						<div className="nav-item px-2">
+							<Link to="/blog" className="nav-link text-success" role="button" aria-expanded="false">
+								Blog <i className="fa-solid fa-blog"></i>
+							</Link>
+						</div>
 						{store.token ? (
 							<>
 								<div className="navbar-container d-flex">
@@ -64,11 +74,6 @@ export const Navbar = () => {
 							</>
 						) : (
 							<>
-								<div className="nav-item px-2">
-									<Link to="/blog" className="nav-link text-success" role="button" aria-expanded="false">
-										Blog <i className="fa-solid fa-blog"></i>
-									</Link>
-								</div>
 								<li className="nav-item dropdown d-flex px-2">
 									<Link to="/login" className="login nav-link" role="button" aria-expanded="false">
 										Iniciar sesión <i className="fa-solid fa-right-to-bracket"></i>
@@ -80,7 +85,5 @@ export const Navbar = () => {
 				</div>
 			</div>
 		</nav>
-
-
 	);
 };
