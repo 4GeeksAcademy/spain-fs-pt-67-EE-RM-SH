@@ -116,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            getLesson: async () => {
+            getLessons: async () => {
                 // const store=getStore()
                 const res = await fetch(process.env.BACKEND_URL + "/api/lessons", {
                     method: "GET",
