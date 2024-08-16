@@ -117,18 +117,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
             getLessons: async () => {
-                // const store=getStore()
-                const res = await fetch(process.env.BACKEND_URL + "/api/lessons", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${store.token}`,
-                        "Content-Type": "application/json"
+                const token = localStorage.getItem("jwt-token"); // Obtener el token del localStorage
+
+                if (!token) {
+                    console.error("No token found, cannot fetch lessons.");
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`${process.env.BACKEND_URL}/api/lessons`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}` // Incluir el token en el encabezado
+                        }
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        setStore({ lessons: data }); // Guardar las lecciones en el store
+                        console.log(data);
+                    } else {
+                        console.error("Failed to fetch lessons:", res.statusText);
+                        // Manejo adicional dependiendo del código de estado
                     }
-                })
-                const data = await res.json()
-                setStore({ lessons: data })
-                console.log(data)
+                } catch (error) {
+                    console.error("An error occurred while fetching lessons:", error);
+                }
             },
+
 
 
             getLesson: async (id) => {

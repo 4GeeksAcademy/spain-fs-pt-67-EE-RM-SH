@@ -22,9 +22,7 @@ export const Registration = () => {
         } else {
             alert("Login failed. Please check your credentials.");
 
-            if (!!createUser.access_token) {
-                navigate("/student");
-            }
+
         }
 
 
