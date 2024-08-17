@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import {Cloudinary} from "@cloudinary/url-gen";
 
 
 import { Context } from "../store/appContext";
@@ -12,6 +13,7 @@ export const Registration = () => {
     const [name, setName] = useState('');
     const [lastname, setLastName] = useState('');
     const [role, setRole] = useState('');
+    // const [profile, setProfile] = useState('');
     const navigate = useNavigate();
 
     const handleRegistrer = async (e) => {
@@ -27,6 +29,19 @@ export const Registration = () => {
     return (
         <div className="login-container">
             <form onSubmit={handleRegistrer}>
+
+                {/* <div>
+                    <label htmlFor="profileImage">Foto de perfil:</label>
+                    <image
+                        type="file"
+                        id="profileImage"
+                        src="https://res.cloudinary.com/dz9b1qh4i/image/upload/t_Foto%20de%20perfil/v1723910830/6196dYkcnWL._AC_UY1000__blq861.jpg"
+                        accept="image/*"
+                    />
+                </div> */}
+
+
+
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
@@ -78,4 +93,4 @@ export const Registration = () => {
         </div>
     );
 
-}
+};
