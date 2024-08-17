@@ -10,6 +10,7 @@ import { Payment } from "./pages/payment.js";
 import { Blog } from "./pages/blog.js";
 import { Courses } from "./pages/courses.js";
 import { Student } from "./pages/student.js";
+import { ResetPassword } from "./pages/reset-password.js";
 import injectContext, { Context } from "./store/appContext.js"; // Asegúrate de importar Context
 
 import { Navbar } from "./component/navbar.js";
@@ -41,6 +42,7 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Blog />} path="/blog" />
                         <Route element={<Payment />} path="/payment" />
+                        <Route element={<ResetPassword />} path="/reset-password" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

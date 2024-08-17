@@ -8,6 +8,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             orders: [],
             order_Items: [],
             addCourses: [],
+            resetpassword: {
+                id: "",
+                newpassword: "",
+
+            },
 
             token: localStorage.getItem("jwt-token") || null, // Inicializa el token desde localStorage
         },
@@ -27,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ demo });
             },
 
-            createUser: async (email, password, name, lastname, role) => {
+            createUser: async (email, password, profile, name, lastname, role) => {
                 try {
                     const response = await fetch(`${process.env.BACKEND_URL}/api/registration`, {
                         method: 'POST',
@@ -39,7 +44,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                             password: password,
                             name: name,
                             lastname: lastname,
-                            role: role
+                            role: role,
+                            profile: profile
                         })  // Convierte el cuerpo de la solicitud a una cadena JSON
                     });
 
@@ -482,29 +488,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
             // Aquí empiezan los PUT
-            putUser: async (id, email, password, name, lastname, role) => {
+            putUser: async (id, password) => {
+                try {
+                    // Genera un salt y aplica bcrypt al password
+                    const salt = await bcrypt.genSalt(10);
+                    const hashedPassword = await bcrypt.hash(password, salt);
 
-                // const store = getStore();
+                    // Realiza la solicitud PUT con la contraseña encriptada
+                    const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
+                        method: "PUT",
+                        body: JSON.stringify({
+                            password: hashedPassword,  // Envía la contraseña encriptada
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
 
-                const response = await fetch(process.env.BACKEND_URL + `api/user${id}`, {
-                    method: "PUT",
-                    body: JSON.stringify({
-                        email: email,
-                        password: password,
-                        name: name,
-                        lastname: lastname,
-                        role: role
-
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
+                    if (response.ok) {
+                        alert("Usuario actualizado correctamente");
+                        getUser();  // Asumo que esta función recarga los datos del usuario actualizado
+                    } else {
+                        alert("No se puede actualizar");
                     }
-                })
-                if (response.ok) {
-                    alert("usuario actualizado correctamente")
-                    getUser();
-                } else {
-                    alert("no se puede actualizar");
+                } catch (e) {
+                    console.error("Error actualizando usuario:", e);
+                    alert("Hubo un error en la actualización del usuario");
                 }
             },
 
@@ -612,25 +621,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            // addCourses: async (id, name, price) => {
-            //     const { addCourses } = getStore()
-            //     setStore({ addCourses: [...addCourses, { id, name, price }] })
-            // },
-
-            // addCourses: (element) => {
-            // 	const store = getStore();
-            // 	const { favorites } = store
-            // 	const isFavorite = favorites.filter(item => item.properties.name == element.properties.name);
-            // 	console.log(favorites)
-
-            // 	if (isFavorite.length == 0) {
-            // 		setStore({
-            // 			favorites: [...favorites, element]
-            // 		})
-            // 	} else {
-            // 		console.log("ya existe")
-            // 	}
-            // },
 
             addCourses: (curso) => {
                 const store = getStore();

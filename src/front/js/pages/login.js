@@ -45,6 +45,10 @@ export const Login = () => {
 					<button>Registering</button>
 				</Link>
 				<button onClick={handleLogin}><h3>Login</h3></button>
+				<Link className="resetetpassword" to="/reset-password">
+					<button>¿Olvidaste la contraseña?</button>
+				</Link>
+
 			</div>
 		</div>
 	);
