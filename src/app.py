@@ -22,6 +22,7 @@ app = Flask(__name__)
 
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+# app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 15 * 60  # 15 minutos
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app) 
 
