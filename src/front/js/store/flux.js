@@ -389,14 +389,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-            // logout: () => {
-            //     localStorage.removeItem("jwt-token");
-            //     setStore({ token: null });
-            // },
 
-            // setToken: (token) => {
-            //     setStore({ token });
-            // },
 
             // Aquí empiezan los DELETE
             deleteUser: async (id) => {
@@ -459,6 +452,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
+
+            logout: () => {
+                localStorage.removeItem("jwt-token");
+                setStore({ token: null });
+            },
+
+            setToken: (token) => {
+                setStore({ token });
+            },
 
 
             handleLogout: async () => {
