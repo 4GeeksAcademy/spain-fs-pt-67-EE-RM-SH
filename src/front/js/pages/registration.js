@@ -22,12 +22,8 @@ export const Registration = () => {
         } else {
             alert("Login failed. Please check your credentials.");
 
-            if (createUser) {
-                navigate("/student");
-            }
         }
-    };
-
+    }
 
     return (
         <div className="login-container">
@@ -82,4 +78,5 @@ export const Registration = () => {
 
         </div>
     );
-}
+};
+
