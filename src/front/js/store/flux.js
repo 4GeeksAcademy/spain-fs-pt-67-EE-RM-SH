@@ -8,11 +8,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             orders: [],
             order_Items: [],
             addCourses: [],
-            resetpassword: {
-                id: "",
-                newpassword: "",
+            // resetpassword: {
+            //     id: "",
+            //     newpassword: "",
 
-            },
+            // },
 
             token: localStorage.getItem("jwt-token") || null, // Inicializa el token desde localStorage
         },
@@ -348,7 +348,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
 
-            getOrder_Item: async () => {
+            getOrder_Item: async (id) => {
                 // const store=getStore()
                 const res = await fetch(process.env.BACKEND_URL + `/api/Order_Item${id}`, {
                     method: "GET",
@@ -389,14 +389,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-            logout: () => {
-                localStorage.removeItem("jwt-token");
-                setStore({ token: null });
-            },
 
-            setToken: (token) => {
-                setStore({ token });
-            },
 
             // Aquí empiezan los DELETE
             deleteUser: async (id) => {
@@ -459,6 +452,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
+
+            logout: () => {
+                localStorage.removeItem("jwt-token");
+                setStore({ token: null });
+            },
+
+            setToken: (token) => {
+                setStore({ token });
+            },
 
 
             handleLogout: async () => {

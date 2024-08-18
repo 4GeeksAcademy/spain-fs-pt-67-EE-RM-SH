@@ -2,10 +2,10 @@ from flask import Blueprint, request, jsonify, abort
 from api.models import db, User, Courses, Lesson, Orders, Order_item
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, get_jwt
 from datetime import timedelta
-# import redis
 from api.models import db
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_cors import CORS
+
 
 api = Blueprint("api", __name__)
 CORS(api)
@@ -58,7 +58,7 @@ def logout():
     jti = get_jwt()["jti"]  # jti es el identificador del JWT
     
     # Añadir el jti a la blocklist
-    # jwt_redis_blocklist.set(jti, "", ex=timedelta(days=30)) # Ejemplo con Redis
+    jwt_redis_blocklist.set(jti, "", ex=timedelta(days=30)) # Ejemplo con Redis
     
     return jsonify(jti), 200
 

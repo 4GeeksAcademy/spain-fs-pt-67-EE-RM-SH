@@ -21,6 +21,7 @@ typing-extensions = "*"
 flask-jwt-extended = "*"
 flask-bcrypt = "*"
 bcrypt = "*"
+redis = "*"
 
 [requires]
 python_version = "3.10"

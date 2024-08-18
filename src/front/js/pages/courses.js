@@ -56,7 +56,98 @@ export const Courses = () => {
 	useEffect(() => {
 		actions.getCourses();
 		actions.getCourse();
+		actions.getOrders()
 	}, [actions]);
+
+
+
+	const handleBuy = async (course) => {
+		try {
+			const userId = 1;  // Obtén el ID del usuario actual de tu lógica de autenticación
+			const methodsPayment = "credit_card";  // Cambia según el método de pago real
+			const total = course.price;  // Suponiendo que solo hay un curso en la orden
+			const status = "pending";
+
+			// Crear una nueva orden usando la acción del contexto
+			const orderResponse = await actions.createOrders({
+				user_id: userId,
+				methods_payment: methodsPayment,
+				payment_date: new Date().toISOString(),
+				total: total,
+				status: status,
+			});
+
+			if (orderResponse.ok) {
+				const orderId = orderResponse.data.id;
+
+				// Crear el item de la orden usando la acción del contexto
+				const orderItemResponse = await actions.createOrderItem({
+					quantity: 1,  // Suponiendo que la cantidad es 1
+					course_id: course.id,
+					order_id: orderId,
+				});
+
+				if (orderItemResponse.ok) {
+					alert("Compra realizada con éxito");
+				} else {
+					alert("Error al crear el item de la orden");
+				}
+			} else {
+				alert("Error al crear la orden");
+			}
+		} catch (error) {
+			console.error("Error durante el proceso de compra:", error);
+			alert("Error al realizar la compra");
+		}
+	};
+
+	const handleAddToCart = async (course) => {
+		try {
+			let orderId = store.currentOrderId; // Obtén el ID de la orden actual desde el estado o contexto
+
+			if (!orderId) {
+				const userId = 1;  // Obtén el ID del usuario actual de tu lógica de autenticación
+				const methodsPayment = "credit_card";  // Cambia según el método de pago real
+				const total = course.price;  // Suponiendo que solo hay un curso en la orden
+				const status = "pending";
+
+				// Crear una nueva orden si no existe una actual usando la acción del contexto
+				const orderResponse = await actions.createOrder({
+					user_id: userId,
+					methods_payment: methodsPayment,
+					payment_date: new Date().toISOString(),
+					total: total,
+					status: status,
+				});
+
+				if (orderResponse.ok) {
+					orderId = orderResponse.data.id;
+					// Actualiza el estado o contexto con el nuevo orderId
+					actions.setCurrentOrderId(orderId); // Asume que hay una acción para actualizar el estado
+				} else {
+					alert("Error al crear la orden");
+					return;
+				}
+			}
+
+			// Crear el item de la orden usando la acción del contexto
+			const orderItemResponse = await actions.createOrderItem({
+				quantity: 1,  // Suponiendo que la cantidad es 1
+				course_id: course.id,
+				order_id: orderId,
+			});
+
+			if (orderItemResponse.ok) {
+				alert("Curso añadido al carrito");
+			} else {
+				alert("Error al añadir el curso al carrito");
+			}
+		} catch (error) {
+			console.error("Error durante el proceso de añadir al carrito:", error);
+			alert("Error al añadir el curso al carrito");
+		}
+	};
+
 
 	return (
 		<div className="text-center mt-5">
