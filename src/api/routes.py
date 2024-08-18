@@ -25,7 +25,7 @@ def handle_hello():
 def create_user():
     body = request.json
     hashed_password = generate_password_hash(body["password"]).decode('utf-8') 
-    me = User(name=body["name"], lastname=body["lastname"], email=body["email"], password= hashed_password, role=body["role"] , is_active=True)
+    me = User(name=body["name"], profile=body["profile"], lastname=body["lastname"], email=body["email"], password= hashed_password, role=body["role"] , is_active=True)
     db.session.add(me)
     db.session.commit()
     access_token = create_access_token(identity=me.email)
@@ -85,20 +85,40 @@ def get_user(id):
     return jsonify(user.serialize())
 
 
+# @api.route('/user/<int:id>', methods=['PUT'])
+# def update_user(id):
+#     user = User.query.get(id)
+#     if not user:
+#         abort(404)
+#     data = request.get_json()
+#     user.role = data['role']
+#     user.name = data['name']
+#     user.lastname = data['lastname']
+#     user.email = data['email']
+#     user.password = data['password']
+#     user.is_active = data['is_active']
+#     db.session.commit()
+#     return jsonify(user.serialize())
+
+
 @api.route('/user/<int:id>', methods=['PUT'])
 def update_user(id):
     user = User.query.get(id)
     if not user:
         abort(404)
     data = request.get_json()
-    user.role = data['role']
-    user.name = data['name']
-    user.lastname = data['lastname']
-    user.email = data['email']
-    user.password = data['password']
+    
+    # Reemplazar el password por su versión hasheada
+    hashed_password = generate_password_hash(data['password']).decode('utf-8')
+    
+    # Asignación de valores
+    user.password = hashed_password
     user.is_active = data['is_active']
+    
     db.session.commit()
     return jsonify(user.serialize())
+
+
 
 @api.route('/user/<int:id>', methods=['DELETE'])
 def delete_user(id):
