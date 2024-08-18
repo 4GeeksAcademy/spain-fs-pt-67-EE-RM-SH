@@ -393,4 +393,25 @@
     transform: scale(1.1)
   }
 
-  
+.list-aside li a {
+  text-decoration:none;
+  color: #ffffff;
+}
+
+.list-aside li a:hover{
+  color:#10a624;
+
+}
+
+.card2{
+  border: solid 1px;
+  border-color: #10a624;
+}
+
+.card-header{
+  font-size: 25px;
+}
+
+.list-group-item{
+  background-color: black;
+}
