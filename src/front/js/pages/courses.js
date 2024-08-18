@@ -55,20 +55,21 @@ export const Courses = () => {
 
 	useEffect(() => {
 		actions.getCourses();
-		actions.getCourse();
-		actions.getOrders()
+		actions.getOrders();
 	}, [actions]);
-
 
 
 	const handleBuy = async (course) => {
 		try {
-			const userId = 1;  // Obtén el ID del usuario actual de tu lógica de autenticación
-			const methodsPayment = "credit_card";  // Cambia según el método de pago real
-			const total = course.price;  // Suponiendo que solo hay un curso en la orden
+			const userId = store.users?.id;  // Obtén el ID del usuario desde el estado global o contexto
+			if (!userId) throw new Error("Usuario no autenticado");
+
+			const methodsPayment = selectedPaymentMethod;  // Método de pago seleccionado
+			const total = course.price;  // Precio del curso
 			const status = "pending";
 
-			// Crear una nueva orden usando la acción del contexto
+			console.log("Iniciando creación de orden...");
+
 			const orderResponse = await actions.createOrders({
 				user_id: userId,
 				methods_payment: methodsPayment,
@@ -77,12 +78,13 @@ export const Courses = () => {
 				status: status,
 			});
 
+			console.log("Respuesta de la creación de orden:", orderResponse);
+
 			if (orderResponse.ok) {
 				const orderId = orderResponse.data.id;
 
-				// Crear el item de la orden usando la acción del contexto
 				const orderItemResponse = await actions.createOrderItem({
-					quantity: 1,  // Suponiendo que la cantidad es 1
+					quantity: 1,
 					course_id: course.id,
 					order_id: orderId,
 				});
@@ -93,61 +95,13 @@ export const Courses = () => {
 					alert("Error al crear el item de la orden");
 				}
 			} else {
-				alert("Error al crear la orden");
+				alert(`Error al crear la orden: ${orderResponse.status}`);
 			}
 		} catch (error) {
 			console.error("Error durante el proceso de compra:", error);
-			alert("Error al realizar la compra");
+			alert(`Error al realizar la compra: ${error.message}`);
 		}
 	};
-
-	const handleAddToCart = async (course) => {
-		try {
-			let orderId = store.currentOrderId; // Obtén el ID de la orden actual desde el estado o contexto
-
-			if (!orderId) {
-				const userId = 1;  // Obtén el ID del usuario actual de tu lógica de autenticación
-				const methodsPayment = "credit_card";  // Cambia según el método de pago real
-				const total = course.price;  // Suponiendo que solo hay un curso en la orden
-				const status = "pending";
-
-				// Crear una nueva orden si no existe una actual usando la acción del contexto
-				const orderResponse = await actions.createOrder({
-					user_id: userId,
-					methods_payment: methodsPayment,
-					payment_date: new Date().toISOString(),
-					total: total,
-					status: status,
-				});
-
-				if (orderResponse.ok) {
-					orderId = orderResponse.data.id;
-					// Actualiza el estado o contexto con el nuevo orderId
-					actions.setCurrentOrderId(orderId); // Asume que hay una acción para actualizar el estado
-				} else {
-					alert("Error al crear la orden");
-					return;
-				}
-			}
-
-			// Crear el item de la orden usando la acción del contexto
-			const orderItemResponse = await actions.createOrderItem({
-				quantity: 1,  // Suponiendo que la cantidad es 1
-				course_id: course.id,
-				order_id: orderId,
-			});
-
-			if (orderItemResponse.ok) {
-				alert("Curso añadido al carrito");
-			} else {
-				alert("Error al añadir el curso al carrito");
-			}
-		} catch (error) {
-			console.error("Error durante el proceso de añadir al carrito:", error);
-			alert("Error al añadir el curso al carrito");
-		}
-	};
-
 
 	return (
 		<div className="text-center mt-5">
@@ -174,7 +128,12 @@ export const Courses = () => {
 								<p className="card-cost1">${item.price_original}</p>
 								<p className="card-cost2">${item.price}</p>
 								<div>
-									<Link to="/payment"><button className="btn2 m-3">Comprar</button></Link>
+									<button
+										onClick={() => handleBuy(item)}  // Aquí enlazamos la función handleBuy
+										className="btn2 m-3"
+									>
+										Comprar
+									</button>
 								</div>
 								<div>
 									<button

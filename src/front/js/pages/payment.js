@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 
-export const Payment = props => {
+export const Payment = () => {
 	const { store, actions } = useContext(Context);
 	const [formData, setFormData] = useState({
 		cardName: '',
@@ -32,26 +29,47 @@ export const Payment = props => {
 		});
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		// Aquí puedes manejar el envío del formulario, como enviar los datos a tu servidor o pasarela de pago.
-		console.log('Datos del formulario:', formData);
-	};
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
+	// 	// Aquí puedes manejar el envío del formulario, como enviar los datos a tu servidor o pasarela de pago.
+	// 	console.log('Datos del formulario:', formData);
+	// 	// Ejemplo: actions.submitPayment(formData); // Asegúrate de definir esta acción
+	// };
+
+	// useEffect(() => {
+
+	// 	actions.getOrders();
+	// }, [actions]);
+
 
 	return (
 		<div className="form-payment">
-			<form className="form-background" onSubmit={handleSubmit}>
-				<h3 className="h3-payment">Detalles del Producto</h3>
+			<form className="form-background" >
 				<div className="product-summary">
-					<span className="product-name">{product.name}</span>
-					<span className="product-quantity">Cantidad: {product.quantity}</span>
-					<span className="product-price">Precio: ${product.price.toFixed(2)}</span>
+					<h3 className="h3-payment">Detalles del Producto</h3>
+					<div>
+						{store.orders.map((item, index) => (
+							<div className="col-2 mx-5" key={index}>
+								<div className="card">
+									{/* Si necesitas una imagen, descomenta y ajusta la línea de abajo */}
+									{/* <img
+									src={item.logo || 'default-logo.png'}
+									className="card-img-top img-fluid d-flex justify-content-center"
+									alt={item.name || 'Curso'}
+								/> */}
+									<div className="card-body">
+										<h5 className="card-title">{item.methods_payment}</h5>
+										<p className="card-text">{item.payment_date}</p>
+										<p className="card-text">{item.total}</p>
+										<p className="card-cost1">${item.status}</p>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
 				</div>
 
-				<div className="total">
-					<span>Total a pagar:</span>
-					<span className="total-price">${(product.price * product.quantity).toFixed(2)}</span>
-				</div>
+
 
 				<h3 className="h3-payment">Detalles de Pago</h3>
 				<div>
@@ -156,16 +174,11 @@ export const Payment = props => {
 						required
 					/>
 				</div>
+
 				<div className="div-pagar">
-					<a href="#" className="btn1 m-3">Pagar</a>
+					<button type="submit" className="btn1 m-3">Pagar</button>
 				</div>
 			</form>
 		</div>
-
 	);
 };
-
-
-
-
-
