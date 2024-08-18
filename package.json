@@ -74,6 +74,8 @@
 		]
 	},
 	"dependencies": {
+		"cloudinary-core": "^2.13.1",
+		"cloudinary-react": "^1.8.1",
 		"normalize.css": "^8.0.1",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",

@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import { CloudinaryContext } from 'cloudinary-react';
 import { Context } from "../store/appContext";
+
+const cloudName = 'sergio'; // Reemplaza esto con tu Cloud Name
+
+
 
 export const Blog = () => {
     const { store, actions } = useContext(Context);
@@ -57,7 +61,7 @@ export const Blog = () => {
                     {/* <!-- Tarjeta para Lenguajes de Programación --> */}
                     <div class="card2 mb-4">
                         <div class="card-header">
-                            Lenguajes de Programación
+                            Documentación a Lenguajes
                         </div>
                         <ul class="list-group list-group-flush list-aside">
                             <li class="list-group-item"><a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">Python</a></li>
@@ -73,7 +77,7 @@ export const Blog = () => {
                     {/* <!-- Tarjeta para Librerías y Frameworks --> */}
                     <div class="card2 mb-4">
                         <div class="card-header">
-                            Librerías y Frameworks
+                            Documentación a Librerías y Frameworks
                         </div>
                         <ul class="list-group list-group-flush list-aside">
                             <li class="list-group-item"><a href="https://reactjs.org/docs/getting-started.html" target="_blank" rel="noopener noreferrer">React</a></li>

@@ -278,17 +278,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
             getOrders: async () => {
-                // const store=getStore()
-                const res = await fetch(process.env.BACKEND_URL + "/api/orders", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
+                try {
+                    const res = await fetch(`${process.env.BACKEND_URL}/api/courses`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        setStore({ orders: data }); // Asegúrate de que `setStore` esté correctamente definido y accesible
+                        console.log(data);
+                    } else {
+                        console.log("Failed to fetch orders:")
+                        // Manejo adicional dependiendo del código de estado
                     }
-                })
-                const data = await res.json()
-                setStore({ orders: data })
-                console.log(data)
+                } catch (error) {
+                    console.error("An error occurred while fetching orders:", error);
+                }
             },
+
+
 
 
             getOrder: async (id) => {
