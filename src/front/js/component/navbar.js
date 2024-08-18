@@ -10,7 +10,16 @@ export const Navbar = () => {
 		actions.logout(); // Función que elimina el token y actualiza el estado
 		navigate("/login"); // Redirige al usuario a la página de inicio
 	};
+	const handleGetOrders = () => {
+		const numberOfItems = store.addCourses.length;
+		const orders = store.orders.length;
 
+		if (numberOfItems >= 1 || orders >= 1) {
+			navigate("/payment");
+		} else {
+			alert("No hay productos en el carrito");
+		}
+	};
 	return (
 		<nav className="navbar navbar-expand-lg p-0">
 			<div className="container-fluid">
@@ -62,14 +71,14 @@ export const Navbar = () => {
 									</button>
 								</li>
 								<div className="dropdown px-2">
-									<Link to="/payment">
-										<button className="carrito" role="button">
-											<span className="num-carrito position-absolute top-0 start-100 translate-middle badge rounded-pill">
-												{store.addCourses.length}
-											</span>
-											<i className="fa-solid fa-cart-shopping fa-lg"></i>
-										</button>
-									</Link>
+
+									<button onClick={handleGetOrders} className="carrito" role="button">
+										<span className="num-carrito position-absolute top-0 start-100 translate-middle badge rounded-pill">
+											{store.addCourses.length}
+										</span>
+										<i className="fa-solid fa-cart-shopping fa-lg"></i>
+									</button>
+
 								</div>
 							</>
 						) : (
