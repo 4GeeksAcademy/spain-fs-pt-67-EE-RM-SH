@@ -313,7 +313,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await res.json()
                 setStore({ orders: data })
                 console.log(data)
-            }, 
+            },
 
 
             crateOrders: async (user_id, methods_payment, payment_date, total, status) => {

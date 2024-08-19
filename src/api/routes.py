@@ -58,7 +58,7 @@ def logout():
     jti = get_jwt()["jti"]  # jti es el identificador del JWT
     
     # Añadir el jti a la blocklist
-    jwt_redis_blocklist.set(jti, "", ex=timedelta(days=30)) # Ejemplo con Redis
+    jwt_redis_blocklist.set(jti, "" , ex=timedelta(days=30)) # Ejemplo con Redis
     
     return jsonify(jti), 200
 
