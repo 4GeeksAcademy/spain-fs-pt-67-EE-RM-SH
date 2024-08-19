@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import bgVideo from '../../videos/133C.gif';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export const Courses = () => {
 	const { store, actions } = useContext(Context);
@@ -60,48 +60,49 @@ export const Courses = () => {
 
 
 	const handleBuy = async (course) => {
-		try {
-			const userId = store.users?.id;  // Obtén el ID del usuario desde el estado global o contexto
-			if (!userId) throw new Error("Usuario no autenticado");
+		
+			// const userId = store.users?.id;  // Obtén el ID del usuario desde el estado global o contexto
+			// if (userId) throw new Error("Usuario no autenticado");
 
-			const methodsPayment = selectedPaymentMethod;  // Método de pago seleccionado
-			const total = course.price;  // Precio del curso
-			const status = "pending";
+			// const methodsPayment = selectedPaymentMethod;  // Método de pago seleccionado
+			// const total = course.price;  // Precio del curso
+			// const status = "pending";
 
-			console.log("Iniciando creación de orden...");
+			// console.log("Iniciando creación de orden...");
 
-			const orderResponse = await actions.createOrders({
-				user_id: userId,
-				methods_payment: methodsPayment,
-				payment_date: new Date().toISOString(),
-				total: total,
-				status: status,
-			});
+			// const orderResponse = await actions.createOrders({
+			// 	user_id: userId,
+			// 	methods_payment: methodsPayment,
+			// 	payment_date: new Date().toISOString(),
+			// 	total: total,
+			// 	status: status,
+			// });
 
-			console.log("Respuesta de la creación de orden:", orderResponse);
+			// console.log("Respuesta de la creación de orden:", orderResponse);
 
-			if (orderResponse.ok) {
-				const orderId = orderResponse.data.id;
+		// 	if (orderResponse.ok) {
+		// 		const orderId = orderResponse.data.id;
 
-				const orderItemResponse = await actions.createOrderItem({
-					quantity: 1,
-					course_id: course.id,
-					order_id: orderId,
-				});
+		// 		const orderItemResponse = await actions.createOrderItem({
+		// 			quantity: 1,
+		// 			course_id: course.id,
+		// 			order_id: orderId,
+		// 		});
 
-				if (orderItemResponse.ok) {
-					alert("Compra realizada con éxito");
-				} else {
-					alert("Error al crear el item de la orden");
-				}
-			} else {
-				alert(`Error al crear la orden: ${orderResponse.status}`);
-			}
-		} catch (error) {
-			console.error("Error durante el proceso de compra:", error);
-			alert(`Error al realizar la compra: ${error.message}`);
-		}
+		// 		if (orderItemResponse.ok) {
+		// 			alert("Compra realizada con éxito");
+		// 		} else {
+		// 			alert("Error al crear el item de la orden");
+		// 		}
+		// 	} else {
+		// 		alert(`Error al crear la orden: ${orderResponse.status}`);
+		// 	}
+		// } catch (error) {
+		// 	console.error("Error durante el proceso de compra:", error);
+		// 	alert(`Error al realizar la compra: ${error.message}`);
+		// }
 	};
+
 
 	return (
 		<div className="text-center mt-5">
@@ -128,12 +129,12 @@ export const Courses = () => {
 								<p className="card-cost1">${item.price_original}</p>
 								<p className="card-cost2">${item.price}</p>
 								<div>
-									<button
+									<Link to="/payment" ><button
 										onClick={() => handleBuy(item)}  // Aquí enlazamos la función handleBuy
 										className="btn2 m-3"
 									>
 										Comprar
-									</button>
+									</button></Link>
 								</div>
 								<div>
 									<button

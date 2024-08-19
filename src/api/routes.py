@@ -24,8 +24,9 @@ def handle_hello():
 @api.route('/registration', methods=['POST'])
 def create_user():
     body = request.json
+    print("entro")
     hashed_password = generate_password_hash(body["password"]).decode('utf-8') 
-    me = User(name=body["name"], profile=body["profile"], lastname=body["lastname"], email=body["email"], password= hashed_password, role=body["role"] , is_active=True)
+    me = User(name=body["name"], lastname=body["lastname"], email=body["email"], password= hashed_password, role=body["role"] , is_active=True, profile="blablablavla")
     db.session.add(me)
     db.session.commit()
     access_token = create_access_token(identity=me.email)

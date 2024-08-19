@@ -32,24 +32,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ demo });
             },
 
-            createUser: async (email, password, profile, name, lastname, role) => {
+
+
+
+
+            createUser: async (email, password, name, lastname, role) => {
                 try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/registration`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'  // Indica que el cuerpo de la solicitud es JSON
-                        },
+                    const response = await fetch(process.env.BACKEND_URL + "/api/registration", {
+                        method: "POST",
                         body: JSON.stringify({
                             email: email,
                             password: password,
                             name: name,
                             lastname: lastname,
                             role: role,
-                            profile: profile
-                        })  // Convierte el cuerpo de la solicitud a una cadena JSON
+                        }),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
                     });
-
                     const data = await response.json();
+                    console.log(data)
 
                     if (response.ok) {
 
@@ -313,7 +316,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await res.json()
                 setStore({ orders: data })
                 console.log(data)
-            }, 
+            },
 
 
             crateOrders: async (user_id, methods_payment, payment_date, total, status) => {
