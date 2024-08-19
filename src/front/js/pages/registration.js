@@ -23,9 +23,10 @@ export const Registration = () => {
             navigate("/"); // Redirige a la pagina student si el inicio de sesión es exitoso
         } else {
             alert("Login failed. Please check your credentials.");
-        }
 
-    };
+        }
+    }
+
     return (
         <div className="login-container">
             <form onSubmit={handleRegistrer}>
@@ -92,5 +93,5 @@ export const Registration = () => {
 
         </div>
     );
-
 };
+
