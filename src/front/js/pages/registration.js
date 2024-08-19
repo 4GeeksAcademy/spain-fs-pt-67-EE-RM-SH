@@ -1,12 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import {Cloudinary} from "@cloudinary/url-gen";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from "@cloudinary/url-gen/actions/resize";
 
 
 import { Context } from "../store/appContext";
 
 export const Registration = () => {
     const { store, actions } = useContext(Context);
+
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'dz9b1qh4i'
+        }
+    });
+    // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
+    const myImage1 = cld.image('6196dYkcnWL._AC_UY1000__blq861');
+
+
+    // Resize to 250 x 250 pixels using the 'fill' crop mode.
+    myImage1.resize(fill().width(250).height(250));
+
+
+
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -31,15 +48,10 @@ export const Registration = () => {
         <div className="login-container">
             <form onSubmit={handleRegistrer}>
 
-                {/* <div>
+                <div>
                     <label htmlFor="profileImage">Foto de perfil:</label>
-                    <image
-                        type="file"
-                        id="profileImage"
-                        src="https://res.cloudinary.com/dz9b1qh4i/image/upload/t_Foto%20de%20perfil/v1723910830/6196dYkcnWL._AC_UY1000__blq861.jpg"
-                        accept="image/*"
-                    />
-                </div> */}
+                    <AdvancedImage cldImg={myImage1} />
+                </div>
 
 
 
