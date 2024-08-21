@@ -15,18 +15,24 @@ export const Blog = () => {
     // Create a Cloudinary instance and set your cloud name.
     const cld = new Cloudinary({
         cloud: {
-            cloudName: 'dz9b1qh4i'
+            cloudName: 'de1mieuze'
         }
     });
     // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-    const myImage1 = cld.image('6196dYkcnWL._AC_UY1000__blq861');
-    const myImage2 = cld.image('v1724088452/JavaScript-Symbol-8_arrrht');
-
-
+    const myImage1 = cld.image('v1724262435/mxzyKWUv3p6qd9hGxh2XgAwNiCk_tyw0rg');
+    const myImage2 = cld.image('v1724262623/sddefault_qinjnq');
+    const myImage3 = cld.image('v1724263308/dramatech_nyjxrq');
+    const myImage4 = cld.image('v1724264065/1716461910327_sswr9w');
+    const myImage5 = cld.image('v1724264365/alpinelinux-logo_unqi3x');
+   
 
     // Resize to 250 x 250 pixels using the 'fill' crop mode.
     myImage1.resize(fill().width(250).height(250));
     myImage2.resize(fill().width(250).height(250));
+    myImage3.resize(fill().width(250).height(250));
+    myImage4.resize(fill().width(250).height(250));
+    myImage5.resize(fill().width(250).height(250));
+
 
 
 
@@ -55,21 +61,21 @@ export const Blog = () => {
                         </article>
 
                         <article className="mb-4">
-                            <img src="path-to-your-image/drama-tech.jpg" alt="Drama Tech" className="img-fluid mb-3" />
+                        <AdvancedImage cldImg={myImage3} />
                             <h2>Drama Tech: ¿Los comentarios son mala práctica?</h2>
                             <p>Los comentarios en el código siempre han sido un tema de debate. Analizamos diferentes puntos de vista y te ofrecemos recomendaciones sobre cómo comentar tu código de manera efectiva.</p>
                             <a href="/post/3" className="btn btn-primary">Leer más</a>
                         </article>
 
                         <article className="mb-4">
-                            <img src="path-to-your-image/chat-gpt4.jpg" alt="Chat GPT-4" className="img-fluid mb-3" />
+                        <AdvancedImage cldImg={myImage4} />
                             <h2>Chat GPT-4 y el Futuro de la IA</h2>
                             <p>Con el lanzamiento de GPT-4, la inteligencia artificial está dando un salto significativo. Exploramos las nuevas capacidades de GPT-4 y cómo puede impactar el desarrollo de aplicaciones y servicios.</p>
                             <a href="/post/4" className="btn btn-primary">Leer más</a>
                         </article>
 
                         <article className="mb-4">
-                            <img src="path-to-your-image/alpine-linux.jpg" alt="Alpine Linux" className="img-fluid mb-3" />
+                        <AdvancedImage cldImg={myImage5} />
                             <h2>Cómo usar Alpine Linux en VirtualBox</h2>
                             <p>Aprende a configurar Alpine Linux en una máquina virtual utilizando VirtualBox. Este tutorial te guiará a través del proceso de instalación y configuración de esta ligera distribución de Linux.</p>
                             <a href="/post/5" className="btn btn-primary">Leer más</a>

@@ -59,7 +59,7 @@ def logout():
     jti = get_jwt()["jti"]  # jti es el identificador del JWT
     
     # Añadir el jti a la blocklist
-    jwt_redis_blocklist.set(jti, "", ex=timedelta(days=30)) # Ejemplo con Redis
+    jwt_redis_blocklist.set(jti, "" , ex=timedelta(days=30)) # Ejemplo con Redis
     
     return jsonify(jti), 200
 
@@ -85,21 +85,6 @@ def get_user(id):
         abort(404)
     return jsonify(user.serialize())
 
-
-# @api.route('/user/<int:id>', methods=['PUT'])
-# def update_user(id):
-#     user = User.query.get(id)
-#     if not user:
-#         abort(404)
-#     data = request.get_json()
-#     user.role = data['role']
-#     user.name = data['name']
-#     user.lastname = data['lastname']
-#     user.email = data['email']
-#     user.password = data['password']
-#     user.is_active = data['is_active']
-#     db.session.commit()
-#     return jsonify(user.serialize())
 
 
 @api.route('/user/<int:id>', methods=['PUT'])
