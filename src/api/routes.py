@@ -86,21 +86,6 @@ def get_user(id):
     return jsonify(user.serialize())
 
 
-# @api.route('/user/<int:id>', methods=['PUT'])
-# def update_user(id):
-#     user = User.query.get(id)
-#     if not user:
-#         abort(404)
-#     data = request.get_json()
-#     user.role = data['role']
-#     user.name = data['name']
-#     user.lastname = data['lastname']
-#     user.email = data['email']
-#     user.password = data['password']
-#     user.is_active = data['is_active']
-#     db.session.commit()
-#     return jsonify(user.serialize())
-
 
 @api.route('/user/<int:id>', methods=['PUT'])
 def update_user(id):
