@@ -5,6 +5,8 @@ from datetime import timedelta
 from api.models import db
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_cors import CORS
+import mailtrap as mt
+import requests
 
 
 api = Blueprint("api", __name__)
@@ -351,4 +353,20 @@ def blog():
         "message": "Bienvenido al blog"
     }
     return jsonify(response_body), 200
+
+@api.route("/mailtest", methods=["GET"])
+def mailtrap():
+
+    url = "https://sandbox.api.mailtrap.io/api/send/3071313"
+
+    payload = "{\"from\":{\"email\":\"mailtrap@example.com\",\"name\":\"Mailtrap Test\"},\"to\":[{\"email\":\"rogermanrique84@gmail.com\"}],\"subject\":\"Esta es una prueba de como puedo modificar el correo!\",\"text\":\"Congrats for sending test email with Mailtrap!\",\"category\":\"Integration Test\"}"
+    headers = {
+    "Authorization": "Bearer 7a681b326212a298149c296df325d8ca",
+    "Content-Type": "application/json"
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
+    return jsonify({"mensaje":"OK"}), 200
 
